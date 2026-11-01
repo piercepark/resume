@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>박민규 포트폴리오 · 센터 운영 매니저</title>
+<meta name="description" content="애프터 요가&필라테스 서울숲점에서 예약·매출·시간표·응대를 시스템으로 바꾼 23개월의 결과물">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<!-- 숫자 출처·구성 결정 = ../결정기록_스토리보드_2026-11-01.md · 샘플 원본 경로 = 결정기록_포트폴리오_2026-11-01.md -->
+<style>
+  :root {
+    --bg: #ffffff; --bg-grey: #f2f4f6; --hairline: rgba(0,0,33,.07); --line: #e5e8eb;
+    --pressed: rgba(2,32,71,.05);
+    --t-strong: #191f28; --t-title: #333d4b; --t-body: #4e5968; --t-sub: #6b7684; --t-hint: #b0b8c1;
+    --g300: #d1d6db;
+    --blue: #3182f6; --blue-600: #2272eb;
+    --green: #03b26c; --red-badge: #d22030;
+    --shadow-float: 0 16px 60px rgba(0,29,58,.18);
+    --wrap: 1120px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+                 'Apple SD Gothic Neo', Roboto, 'Noto Sans KR', sans-serif;
+    font-weight: 400; line-height: 1.5; color: var(--t-strong); background: var(--bg);
+    word-break: keep-all; overflow-wrap: break-word; -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: inherit; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: calc(var(--wrap) + 80px); margin: 0 auto; padding: 0 40px; }
+  .nb { white-space: nowrap; }
+
+  /* 버튼 (TDS) */
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 38px; padding: 0 16px;
+         border-radius: 10px; font-size: 15px; font-weight: 600; line-height: 1.252; white-space: nowrap;
+         transition: background-color .1s, transform .1s; }
+  .btn:active { transform: scale(.96); }
+  .btn--primary { background: var(--blue); color: #fff; }
+  .btn--primary:hover { background: var(--blue-600); }
+  .btn--light-weak { background: rgba(222,222,255,.19); color: #fff; }
+
+  /* 상단 바 */
+  .nav { position: sticky; top: 0; z-index: 30; background: var(--bg); border-bottom: 1px solid var(--hairline); }
+  .nav__in { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .nav__brand { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+  .nav__brand b { font-size: 17px; font-weight: 700; color: var(--t-strong); }
+  .nav__brand span { font-size: 15px; color: var(--t-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* 첫 화면 */
+  .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; padding-top: 72px; padding-bottom: 56px; }
+  .hero__eyebrow { margin-bottom: 12px; font-size: 17px; font-weight: 500; color: var(--t-body); }
+  .hero__title { font-size: clamp(30px, 4.2vw, 48px); line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; color: var(--t-strong); }
+  .hero__desc { margin-top: 20px; font-size: 17px; line-height: 1.65; color: var(--t-body); }
+  .meta { margin-top: 32px; border-top: 1px solid var(--line); }
+  .meta__row { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.35; }
+  .meta__k { color: var(--t-sub); flex: 0 0 auto; }
+  .meta__v { color: var(--t-strong); font-weight: 500; text-align: right; }
+  .hero__stage { position: relative; height: 540px; border-radius: 28px; background: var(--bg-grey); overflow: hidden; }
+  .hero__stage .phone { position: absolute; width: 232px; }
+  .hero__stage .phone--front { left: 13%; top: 64px; z-index: 2; }
+  .hero__stage .phone--back { right: 11%; top: 132px; }
+
+  /* 폰 프레임 */
+  .phone { padding: 9px; border-radius: 38px; background: var(--t-strong); box-shadow: var(--shadow-float); }
+  .phone img { width: 100%; aspect-ratio: 780 / 1688; object-fit: cover; object-position: top; border-radius: 29px; background: #fff; }
+
+  /* 숫자 묶음 */
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 28px 0; background: var(--bg-grey); border-radius: 20px; }
+  .stat { position: relative; padding: 0 28px; }
+  .stat + .stat::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 1px; background: var(--line); }
+  .stat__num { font-size: clamp(26px, 2.6vw, 30px); line-height: 1.3; font-weight: 700; letter-spacing: -0.02em; color: var(--t-strong); font-variant-numeric: tabular-nums; }
+  .stat__label { margin-top: 6px; font-size: 15px; line-height: 1.4; font-weight: 600; color: var(--t-title); }
+  .stat__note { margin-top: 2px; font-size: 13px; line-height: 1.5; color: var(--t-body); }
+
+  /* 탭 */
+  #work { margin-top: 72px; }
+  .tabs { position: sticky; top: 64px; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--hairline); }
+  .tabs__in { display: flex; overflow-x: auto; scrollbar-width: none; }
+  .tabs__in::-webkit-scrollbar { display: none; }
+  .tab { position: relative; flex: 1 0 auto; min-width: 64px; padding: 16px 12px 15px; text-align: center;
+         font-size: 17px; line-height: 1.252; font-weight: 600; color: var(--t-sub); white-space: nowrap; }
+  .tab:hover { color: var(--t-body); }
+  .tab[aria-selected="true"] { color: var(--t-title); font-weight: 700; }
+  .tab[aria-selected="true"]::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 2px; border-radius: 1px; background: var(--t-title); }
+  .tab:focus-visible { outline: 2px solid var(--blue); outline-offset: -4px; border-radius: 8px; }
+
+  /* 탭 본문 */
+  .panel { padding: 72px 0 8px; }
+  .ph { max-width: 780px; }
+  .ph__eyebrow { margin-bottom: 10px; font-size: 15px; font-weight: 500; color: var(--t-sub); }
+  .ph__title { font-size: clamp(26px, 3vw, 34px); line-height: 1.3; font-weight: 700; letter-spacing: -0.02em; color: var(--t-strong); }
+  .ph__desc { margin-top: 16px; font-size: 17px; line-height: 1.65; color: var(--t-body); }
+  .panel .stats { margin-top: 40px; }
+
+  /* 섹션 제목 (ListHeader) */
+  .lh { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: 64px 0 20px; }
+  .lh h3 { font-size: 20px; line-height: 1.45; font-weight: 700; color: var(--t-title); }
+  .lh span { font-size: 13px; color: var(--t-sub); }
+
+  /* 도입 전 → 지금 */
+  .ba { display: grid; grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr); align-items: stretch; margin-top: 24px; }
+  .ba__card { padding: 24px 28px; border-radius: 20px; }
+  .ba__card--before { background: var(--bg-grey); }
+  .ba__card--after { background: var(--bg); border: 1px solid var(--line); }
+  .ba__arrow { align-self: center; justify-self: center; width: 24px; height: 24px; color: var(--t-hint); }
+  .ba__step { margin-top: 12px; font-size: 20px; line-height: 1.45; font-weight: 700; color: var(--t-strong); }
+  .ba__text { margin-top: 6px; font-size: 15px; line-height: 1.6; color: var(--t-body); }
+  .badge { display: inline-flex; align-items: center; padding: 3px 7px; border-radius: 12px; font-size: 13px; line-height: 1.5; font-weight: 700; white-space: nowrap; }
+  .badge--grey { color: var(--t-body); background: rgba(78,89,104,.16); }
+  .badge--green { color: #029359; background: rgba(2,162,98,.16); }
+  .badge--red { color: var(--red-badge); background: rgba(244,67,54,.16); }
+
+  /* 결과물 */
+  .stage { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; padding: 48px 40px 40px; background: var(--bg-grey); border-radius: 28px; }
+  .stage .fig { width: 100%; }
+  .stage .phone-btn { max-width: 236px; margin: 0 auto; }
+  .stage--one { display: flex; justify-content: center; height: 420px; padding: 40px 24px 0; overflow: hidden; }
+  .stage--one .phone-btn { width: 236px; margin: 0; }
+  .stage figcaption { text-align: center; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; align-items: start; margin-top: 32px; }
+  .stage + .grid { margin-top: 40px; }
+  .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .fig--wide { grid-column: 1 / -1; }
+  .grid--1-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+  .tile { display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 4 / 5; padding: 28px;
+          background: var(--bg-grey); border-radius: 20px; transition: transform .2s; }
+  .tile:hover { transform: translateY(-2px); }
+  .tile:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+  .tile img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 8px; box-shadow: 0 8px 28px rgba(0,29,58,.10); }
+  .shot--doc img { width: 100%; aspect-ratio: 1 / 1.414; object-fit: cover; object-position: top; }
+  .shot { display: block; width: 100%; overflow: hidden; border-radius: 16px; border: 1px solid var(--hairline); background: var(--bg);
+          box-shadow: 0 8px 28px rgba(0,29,58,.08); transition: transform .2s, box-shadow .2s; }
+  .shot:hover { transform: translateY(-2px); box-shadow: var(--shadow-float); }
+  .shot:focus-visible, .phone-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+  .phone-btn { display: block; width: 100%; border-radius: 38px; transition: transform .2s; }
+  .phone-btn:hover { transform: translateY(-2px); }
+  .fig figcaption { margin-top: 16px; }
+  .fig figcaption b { display: block; font-size: 17px; line-height: 1.45; font-weight: 700; color: var(--t-title); }
+  .fig figcaption span { display: block; margin-top: 4px; font-size: 15px; line-height: 1.55; color: var(--t-sub); }
+
+  /* 체크 행 */
+  .rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; overflow: hidden; background: var(--line); border-radius: 20px; }
+  .row { display: flex; gap: 12px; align-items: flex-start; padding: 20px 24px; background: var(--bg-grey); }
+  .row svg { flex: 0 0 24px; width: 24px; height: 24px; color: var(--green); }
+  .row b { display: block; font-size: 17px; line-height: 1.4; font-weight: 700; color: var(--t-title); }
+  .row span { display: block; margin-top: 2px; font-size: 15px; line-height: 1.5; color: var(--t-body); }
+
+  /* 한눈에 */
+  .ov { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 56px; align-items: start; margin-top: 40px; }
+  .tl { border-top: 1px solid var(--line); }
+  .tl__row { display: grid; grid-template-columns: 112px minmax(0, 1fr) 24px; gap: 16px; align-items: center; width: 100%;
+             padding: 18px 8px 18px 0; border-bottom: 1px solid var(--line); border-radius: 0; }
+  button.tl__row:hover { background: var(--pressed); }
+  .tl__date { font-size: 15px; font-weight: 600; color: var(--t-sub); font-variant-numeric: tabular-nums; }
+  .tl__title { display: block; font-size: 17px; line-height: 1.4; font-weight: 700; color: var(--t-title); }
+  .tl__desc { display: block; margin-top: 2px; font-size: 15px; line-height: 1.5; color: var(--t-sub); }
+  .tl__arrow { width: 24px; height: 24px; color: var(--t-hint); }
+  .ov__side { position: sticky; top: 148px; }
+  .ov__side .shot img { aspect-ratio: 1400 / 1980; object-fit: cover; }
+  .merit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; overflow: hidden; background: var(--line); border-radius: 20px; }
+  .merit__item { padding: 24px 28px; background: var(--bg-grey); }
+  .merit__q { font-size: 15px; line-height: 1.5; color: var(--t-body); }
+  .merit__a { margin-top: 6px; font-size: 17px; line-height: 1.45; font-weight: 700; color: var(--t-title); }
+
+  /* 응대·발송 */
+  .flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-top: 8px; padding: 32px 16px 28px; list-style: none; background: var(--bg-grey); border-radius: 20px; counter-reset: step; }
+  .flow li { position: relative; padding-top: 44px; text-align: center; font-size: 15px; line-height: 1.4; font-weight: 700; color: var(--t-title); }
+  .flow li::before { counter-increment: step; content: counter(step); position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+                     width: 32px; height: 32px; border-radius: 50%; background: var(--t-strong); color: #fff; font-size: 15px; line-height: 32px; font-weight: 700; text-align: center; }
+  .flow li + li::after { content: ''; position: absolute; top: 16px; left: calc(-50% + 24px); right: calc(50% + 24px); height: 1px; background: var(--g300); }
+  .flow small { display: block; margin-top: 2px; font-size: 13px; font-weight: 400; color: var(--t-body); }
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
+  .cards--even { align-items: stretch; }
+  .card { padding: 28px; background: var(--bg-grey); border-radius: 20px; }
+  .card__label { font-size: 13px; font-weight: 600; color: var(--t-body); }
+  .card__title { margin-top: 4px; font-size: 20px; line-height: 1.45; font-weight: 700; color: var(--t-strong); }
+  .card__desc { margin-top: 4px; font-size: 15px; line-height: 1.55; color: var(--t-body); }
+  .bubble { margin-top: 20px; padding: 18px 20px; background: var(--bg); border: 1px solid var(--line); border-radius: 16px;
+            font-size: 15px; line-height: 1.7; color: var(--t-title); white-space: pre-line; }
+  .var { padding: 1px 5px; border-radius: 6px; background: rgba(78,89,104,.12); color: var(--t-body); font-weight: 500; white-space: nowrap; }
+  .err { text-decoration: underline wavy #f04452; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+  .lint { margin-top: 16px; }
+  .lint__row { display: flex; gap: 10px; align-items: flex-start; padding: 14px 0; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.55; color: var(--t-title); }
+  .lint__row b { font-weight: 700; }
+
+  /* 차트 — 지난 값 grey400 · 강조 grey900 */
+  .chart { margin-top: 28px; }
+  .chart__plot { display: grid; align-items: end; height: 200px; border-bottom: 1px solid var(--g300); }
+  .chart__plot--5, .chart__axis--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .chart__plot--3, .chart__axis--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .bar { position: relative; justify-self: center; width: 44px; background: var(--t-hint); border-radius: 6px 6px 0 0; }
+  .bar--hi { background: var(--t-strong); }
+  .bar__v { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 6px; font-size: 13px; font-weight: 600;
+            color: var(--t-body); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .bar--hi .bar__v { color: var(--t-strong); font-weight: 700; }
+  .pair { justify-self: center; display: flex; align-items: flex-end; gap: 4px; height: 100%; }
+  .pair .bar { width: 30px; }
+  .chart__axis { display: grid; margin-top: 10px; font-size: 13px; color: var(--t-body); text-align: center; }
+  .legend { display: flex; gap: 14px; margin-top: 16px; font-size: 13px; color: var(--t-body); }
+  .legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 3px; vertical-align: -1px; }
+  .chart__note { margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--t-sub); }
+
+  /* 바닥 */
+  .foot { display: flex; justify-content: space-between; gap: 24px; margin-top: 88px; padding-top: 28px; padding-bottom: 56px;
+          border-top: 1px solid var(--line); font-size: 13px; line-height: 1.6; color: var(--t-sub); }
+  .foot__right { flex: 0 0 auto; }
+
+  /* 크게 보기 */
+  .lb { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 64px 24px 24px; background: rgba(25,31,40,.92); }
+  .lb[hidden] { display: none; }
+  .lb figure { display: flex; flex-direction: column; align-items: center; max-width: min(1200px, 100%); }
+  .lb img { max-width: 100%; max-height: calc(100vh - 150px); object-fit: contain; border-radius: 12px; background: #fff; }
+  .lb figcaption { margin-top: 14px; font-size: 15px; color: #fff; text-align: center; }
+  .lb__close { position: absolute; top: 16px; right: 16px; }
+
+  /* PNG 추출용 — 고정 요소 해제 */
+  html.export .nav, html.export .tabs, html.export .ov__side { position: static; }
+  html.export .shot, html.export .phone-btn { transition: none; }
+
+  @media (max-width: 860px) {
+    .wrap { padding: 0 24px; }
+    .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 48px; }
+    .hero__stage { height: 460px; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; }
+    .stat:nth-child(3)::before { display: none; }
+    .ov { grid-template-columns: 1fr; gap: 48px; }
+    .ov__side { position: static; }
+    .grid--3, .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rows, .merit, .cards { grid-template-columns: 1fr; }
+    .grid--1-2 { grid-template-columns: 1fr 1fr; }
+    .ba { grid-template-columns: 1fr; }
+    .ba__arrow { transform: rotate(90deg); margin: 8px 0; }
+    .stage { padding: 40px 24px 32px; gap: 24px; }
+  }
+  @media (max-width: 540px) {
+    .wrap { padding: 0 20px; }
+    .nav__brand span { display: none; }
+    .hero__stage { height: 380px; }
+    .hero__stage .phone { width: 172px; }
+    .hero__stage .phone--front { left: 7%; top: 40px; }
+    .hero__stage .phone--back { right: 7%; top: 96px; }
+    .stats { padding: 20px 0; }
+    .stat { padding: 0 20px; }
+    .stat__num { font-size: 22px; }
+    .tab { flex: 0 0 auto; padding: 14px 14px 13px; font-size: 15px; }
+    .tab[aria-selected="true"]::after { left: 14px; right: 14px; }
+    .panel { padding-top: 48px; }
+    .grid, .grid--3, .grid--4 { grid-template-columns: 1fr; }
+    .stage { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 32px 16px 24px; }
+    .stage .fig:last-child:nth-child(odd) { grid-column: 1 / -1; max-width: 50%; justify-self: center; }
+    .grid--1-2 { grid-template-columns: 1fr; }
+    .stage--one { height: 360px; }
+    .bar { width: 28px; } .pair .bar { width: 20px; }
+    .tl__row { grid-template-columns: minmax(0, 1fr) 24px; row-gap: 4px; }
+    .tl__date { grid-column: 1 / -1; }
+    .flow { grid-template-columns: 1fr; padding: 20px 24px; text-align: left; }
+    .flow li { padding: 0 0 0 48px; min-height: 44px; text-align: left; }
+    .flow li::before { left: 0; transform: none; }
+    .flow li + li { margin-top: 12px; }
+    .flow li + li::after { display: none; }
+    .card { padding: 24px 20px; }
+    .foot { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="nav__brand" href="#top" id="top"><b>박민규</b><span>센터 운영 매니저 포트폴리오</span></a>
+    <button class="btn btn--primary" type="button" data-zoom="assets/storyboard.webp" data-cap="한 장 요약 · A4 스토리보드">한 장 요약 보기</button>
+  </div>
+</header>
+
+<section id="intro">
+  <div class="wrap hero">
+    <div>
+      <p class="hero__eyebrow">애프터 요가&amp;필라테스 · 서울숲점</p>
+      <h1 class="hero__title">센터 운영을<br>시스템으로 바꾼 23개월</h1>
+      <p class="hero__desc">AI 도구로 예약·매출·시간표·응대 체계를 직접 설계하고 만들었어요.<br>사람 손은 덜 가고, 실수는 나가기 전에 막히는 운영을 만들어요.</p>
+      <div class="meta">
+        <div class="meta__row"><span class="meta__k">기간</span><span class="meta__v">2024.12 – 2026.10 · 23개월</span></div>
+        <div class="meta__row"><span class="meta__k">회사</span><span class="meta__v">애프터 요가&amp;필라테스(구 아리아)</span></div>
+        <div class="meta__row"><span class="meta__k">직위</span><span class="meta__v">매니저</span></div>
+        <div class="meta__row"><span class="meta__k">담당</span><span class="meta__v">서울숲점 요가·필라테스·스트레칭</span></div>
+      </div>
+    </div>
+    <div class="hero__stage">
+      <div class="phone phone--front"><img src="assets/board-day.webp" alt="강사용 예약보드 일정 화면"></div>
+      <div class="phone phone--back"><img src="assets/board-consult.webp" alt="회원용 상담 신청 화면"></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="stats" aria-label="한눈에 보는 성과">
+      <div class="stat"><div class="stat__num">2.2배</div><div class="stat__label">담당 지점 매출</div><div class="stat__note">2026년 7~9월, 전년 같은 기간 대비</div></div>
+      <div class="stat"><div class="stat__num">4 → 1단계</div><div class="stat__label">예약 처리 단계</div><div class="stat__note">매니저 중계 → 강사 직접 처리</div></div>
+      <div class="stat"><div class="stat__num">58%</div><div class="stat__label">신규 프로그램 매출 비중</div><div class="stat__note">애프터스트레칭, 2026년 8·9월</div></div>
+      <div class="stat"><div class="stat__num">25종+</div><div class="stat__label">직접 만든 운영 도구·화면</div><div class="stat__note">예약·통계·발송·시간표</div></div>
+    </div>
+  </div>
+</section>
+
+<main id="work">
+  <div class="tabs">
+    <div class="wrap tabs__in" role="tablist" aria-label="결과물 분야">
+      <button class="tab" role="tab" id="t-overview" data-tab="overview" aria-controls="p-overview" type="button">한눈에</button>
+      <button class="tab" role="tab" id="t-booking" data-tab="booking" aria-controls="p-booking" type="button">예약보드</button>
+      <button class="tab" role="tab" id="t-numbers" data-tab="numbers" aria-controls="p-numbers" type="button">매출·보고</button>
+      <button class="tab" role="tab" id="t-channels" data-tab="channels" aria-controls="p-channels" type="button">시간표·채널</button>
+      <button class="tab" role="tab" id="t-messages" data-tab="messages" aria-controls="p-messages" type="button">응대·발송</button>
+      <button class="tab" role="tab" id="t-design" data-tab="design" aria-controls="p-design" type="button">홍보·디자인</button>
+      <button class="tab" role="tab" id="t-handover" data-tab="handover" aria-controls="p-handover" type="button">인계·교육</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- 한눈에 -->
+    <section class="panel" id="p-overview" role="tabpanel" aria-labelledby="t-overview">
+      <header class="ph">
+        <p class="ph__eyebrow">2024.12 – 2026.10</p>
+        <h2 class="ph__title">23개월 동안 이렇게 바꿨어요</h2>
+        <p class="ph__desc">운영 전반을 맡아 숫자의 기반부터 깔고, 매니저를 거치던 일을 하나씩 시스템으로 옮겼어요.<br>장면을 누르면 그 결과물로 이동해요.</p>
+      </header>
+      <div class="ov">
+        <div class="tl">
+          <div class="tl__row"><span class="tl__date">2024.12</span><span><span class="tl__title">매니저로 합류</span><span class="tl__desc">상담·예약부터 정산·시간표·홍보 디자인까지 맡았어요</span></span><span></span></div>
+          <button class="tl__row" type="button" data-go="numbers"><span class="tl__date">2026.05</span><span><span class="tl__title">숫자가 저절로 모이는 장부</span><span class="tl__desc">매출·강사비·급여 자동 계산, 22개월 재계산 불일치 0건</span></span><svg class="tl__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="tl__row" type="button" data-go="numbers"><span class="tl__date">2026.05</span><span><span class="tl__title">애프터스트레칭 런칭</span><span class="tl__desc">런칭 5개월째 월 매출 2,656만 원, 센터 매출의 58%</span></span><svg class="tl__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="tl__row" type="button" data-go="channels"><span class="tl__date">2026.06</span><span><span class="tl__title">시간표 다채널 동기화</span><span class="tl__desc">한 번 고치면 파일 22개와 예약 앱 입력값까지 만들어져요</span></span><svg class="tl__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="tl__row" type="button" data-go="booking"><span class="tl__date">2026.07</span><span><span class="tl__title">예약보드 직접 개발</span><span class="tl__desc">매니저 중계 4단계를 강사 직접 1단계로 줄였어요</span></span><svg class="tl__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="tl__row" type="button" data-go="messages"><span class="tl__date">2026.07</span><span><span class="tl__title">응대·발송 자동화</span><span class="tl__desc">문자 2,068건, <span class="nb">날짜·금액</span> 실수는 보내기 전에 막아요</span></span><svg class="tl__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="tl__row" type="button" data-go="numbers"><span class="tl__date">2026.07 – 09</span><span><span class="tl__title">담당 지점 매출 2.2배</span><span class="tl__desc">3개월 1억 1,125만 원, 전년 같은 기간 4,946만 원</span></span><svg class="tl__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="tl__row" type="button" data-go="design"><span class="tl__date">2026.10</span><span><span class="tl__title">웰니스 페스티벌·홍보</span><span class="tl__desc">행사 홍보와 채널별 홍보물을 직접 기획·디자인했어요</span></span><svg class="tl__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="tl__row" type="button" data-go="handover"><span class="tl__date">2026.10</span><span><span class="tl__title">인수인계</span><span class="tl__desc">업무 7,116건 기록과 23쪽 보고서로 바로 이어받게 했어요</span></span><svg class="tl__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+        <figure class="fig ov__side">
+          <button class="shot" type="button" data-zoom="assets/storyboard.webp" data-cap="한 장 요약 · A4 스토리보드"><img src="assets/storyboard.webp" alt="A4 한 장 스토리보드" loading="lazy"></button>
+          <figcaption><b>한 장 요약</b><span>3막 9장면으로 정리한 A4 스토리보드예요. 이력서에 그대로 넣을 수 있어요.</span></figcaption>
+        </figure>
+      </div>
+      <div class="lh"><h3>함께 일한다면</h3><span>이런 고민이 있는 곳에 도움이 돼요</span></div>
+      <div class="merit">
+        <div class="merit__item"><p class="merit__q">매니저 한 명에게 일이 몰려 있다면</p><p class="merit__a">강사·회원이 직접 쓰는 예약 체계를 만들어요</p></div>
+        <div class="merit__item"><p class="merit__q">매출·정산을 손으로 모으고 있다면</p><p class="merit__a">입력 한 번에 집계·급여·보고까지 이어지게 해요</p></div>
+        <div class="merit__item"><p class="merit__q">채널마다 따로 고치느라 정보가 어긋난다면</p><p class="merit__a">정본 하나로 모든 채널을 한 번에 맞춰요</p></div>
+        <div class="merit__item"><p class="merit__q">새 프로그램을 키우고 싶다면</p><p class="merit__a">런칭 홍보부터 체험·등록 전환 관리까지 함께해요</p></div>
+      </div>
+    </section>
+
+    <!-- 예약보드 -->
+    <section class="panel" id="p-booking" role="tabpanel" aria-labelledby="t-booking" hidden>
+      <header class="ph">
+        <p class="ph__eyebrow">2026.07 – 10 · 기획·개발 직접</p>
+        <h2 class="ph__title">매니저가 중계하던 예약을,<br>강사가 휴대폰에서 직접</h2>
+        <p class="ph__desc">체험 접수부터 정규 예약·출석·일정 이동·정산 조회까지 강사 5명이 휴대폰에서 끝내요. 기입하는 순간 노션과 정산장부에 함께 기록되고, 회차와 강사 지급액이 자동 계산돼요. 외부 개발비와 월 유지비는 0원이에요.</p>
+      </header>
+      <div class="stats">
+        <div class="stat"><div class="stat__num">0 → 85%</div><div class="stat__label">강사가 직접 기입한 정규 수업</div><div class="stat__note">도입 전 → 10월</div></div>
+        <div class="stat"><div class="stat__num">1,315건</div><div class="stat__label">보드로 처리한 일</div><div class="stat__note">강사 몫 8월 70% → 9월 91%</div></div>
+        <div class="stat"><div class="stat__num">215회</div><div class="stat__label">업데이트</div><div class="stat__note">자동 테스트 115개 통과 후 배포</div></div>
+        <div class="stat"><div class="stat__num">7배</div><div class="stat__label">회원 화면 속도</div><div class="stat__note">2.56초 → 0.35초</div></div>
+      </div>
+      <div class="ba">
+        <div class="ba__card ba__card--before"><span class="badge badge--grey">도입 전</span><p class="ba__step">4단계 · 매니저가 중계</p><p class="ba__text">강사는 쓰기 권한이 없었어요. 매니저가 회원 연락처를 전달하고, 강사·회원이 조율한 일정을 다시 받아 노션·정산장부·문자를 모두 처리했어요.</p></div>
+        <svg class="ba__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <div class="ba__card ba__card--after"><span class="badge badge--green">지금</span><p class="ba__step">1단계 · 강사가 직접</p><p class="ba__text">강사가 휴대폰에서 체험 접수·정규 예약·출석·취소·일정 이동·인계·케어 기록·본인 정산 조회까지 해요. 회원은 열린 시간을 직접 골라 신청해요.</p></div>
+      </div>
+      <div class="lh"><h3>결과물 샘플</h3><span>눌러서 크게 보기 · 회원 정보는 가렸어요</span></div>
+      <div class="stage">
+        <figure class="fig"><button class="phone-btn" type="button" data-zoom="assets/board-day.webp" data-cap="강사 일정 화면"><div class="phone"><img src="assets/board-day.webp" alt="강사 일정 화면" loading="lazy"></div></button><figcaption><b>강사 일정 화면</b><span>오늘 할 일과 빈자리를 한눈에 보고 바로 예약해요</span></figcaption></figure>
+        <figure class="fig"><button class="phone-btn" type="button" data-zoom="assets/board-series.webp" data-cap="고정 일정 한 번에 옮기기"><div class="phone"><img src="assets/board-series.webp" alt="고정 일정 옮기기 화면" loading="lazy"></div></button><figcaption><b>고정 일정 한 번에 옮기기</b><span>매주 수업을 요일·시간째 옮기고 미리 확인해요</span></figcaption></figure>
+        <figure class="fig"><button class="phone-btn" type="button" data-zoom="assets/board-consult.webp" data-cap="인스타 상담 신청 페이지"><div class="phone"><img src="assets/board-consult.webp" alt="인스타 상담 신청 페이지" loading="lazy"></div></button><figcaption><b>인스타 상담 신청 페이지</b><span>신청이 담당 강사 인계함에 자동으로 들어가요</span></figcaption></figure>
+      </div>
+      <div class="grid">
+        <figure class="fig fig--wide"><button class="shot" type="button" data-zoom="assets/board-week.webp" data-cap="주간 보기 · 강사·체험·입금 상태 구분"><img src="assets/board-week.webp" alt="예약보드 주간 보기" loading="lazy"></button><figcaption><b>주간 보기</b><span>강사별 수업·빈자리·체험 입금 상태를 색으로 구분해요</span></figcaption></figure>
+        <figure class="fig"><button class="shot" type="button" data-zoom="assets/board-month.webp" data-cap="매니저 월간 보기"><img src="assets/board-month.webp" alt="예약보드 월간 보기" loading="lazy"></button><figcaption><b>매니저 월간 보기</b><span>날짜별 수업 수와 처리할 일을 한곳에서 확인해요</span></figcaption></figure>
+        <div>
+          <div class="lh" style="margin-top:0"><h3>실수를 막는 장치</h3></div>
+          <div class="rows" style="grid-template-columns:1fr">
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>입금 근거 없는 확정 차단</b><span>통장 확인 없이 체험이 확정되지 않아요</span></p></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>24시간 취소 규정 자동 판정</b><span>차감 여부를 화면이 먼저 알려 줘요</span></p></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>다른 강사 예약 수정 차단</b><span>본인 담당 건만 옮기고 취소할 수 있어요</span></p></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>베드 2개 상한·당일 신청 차단</b><span>물리적 자리와 운영 규칙을 화면이 지켜요</span></p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 매출·보고 -->
+    <section class="panel" id="p-numbers" role="tabpanel" aria-labelledby="t-numbers" hidden>
+      <header class="ph">
+        <p class="ph__eyebrow">2026.05 – 10 · 설계·분석</p>
+        <h2 class="ph__title">숫자는 원장에서 저절로 모이고,<br>보고서로 결정이 돼요</h2>
+        <p class="ph__desc">매출 입력 한 번으로 명단 표시·매출 행·계약서·영수증 보관까지 끝나요. 월별 대시보드가 총매출·부문별·강사비 비중을 자동 계산하고, 그 숫자로 대표 보고와 매출 성장 전략을 만들었어요.</p>
+      </header>
+      <div class="stats">
+        <div class="stat"><div class="stat__num">170만 원</div><div class="stat__label">찾아서 바로잡은 정산 오류</div><div class="stat__note">이중지급 742,660원 회수 · PT 누락 958,000원 반영</div></div>
+        <div class="stat"><div class="stat__num">0건</div><div class="stat__label">매출 재계산 불일치</div><div class="stat__note">22개월 대시보드 전체</div></div>
+        <div class="stat"><div class="stat__num">523행</div><div class="stat__label">상품명 표준화</div><div class="stat__note">쪼개지던 집계를 하나로</div></div>
+        <div class="stat"><div class="stat__num">1억 1,125만 원</div><div class="stat__label">담당 지점 7~9월 매출</div><div class="stat__note">전년 같은 기간 4,946만 원</div></div>
+      </div>
+      <div class="lh"><h3>결과물 샘플</h3><span>눌러서 크게 보기</span></div>
+      <div class="cards cards--even">
+        <div class="card">
+          <p class="card__label">원장 자동 집계</p>
+          <p class="card__title">애프터스트레칭 월 매출</p>
+          <p class="card__desc">5월 런칭 뒤 다섯 달 · 결제 기준</p>
+          <div class="chart" role="img" aria-label="애프터스트레칭 월 매출 5월 249만, 6월 774만, 7월 1,514만, 8월 1,882만, 9월 2,656만 원">
+            <div class="chart__plot chart__plot--5">
+              <div class="bar" style="height:15px"><span class="bar__v">249만</span></div>
+              <div class="bar" style="height:47px"><span class="bar__v">774만</span></div>
+              <div class="bar" style="height:91px"><span class="bar__v">1,514만</span></div>
+              <div class="bar" style="height:113px"><span class="bar__v">1,882만</span></div>
+              <div class="bar bar--hi" style="height:160px"><span class="bar__v">2,656만</span></div>
+            </div>
+            <div class="chart__axis chart__axis--5"><span>5월</span><span>6월</span><span>7월</span><span>8월</span><span>9월</span></div>
+          </div>
+          <p class="chart__note">8·9월엔 센터 전체 매출의 58%를 차지했어요</p>
+        </div>
+        <div class="card">
+          <p class="card__label">원장 자동 집계</p>
+          <p class="card__title">담당 지점 월 매출 · 전년 비교</p>
+          <p class="card__desc">7~9월 · 환불 차감 후 결제 기준</p>
+          <div class="chart" role="img" aria-label="담당 지점 월 매출 2025년 7월 1,902만, 8월 1,591만, 9월 1,453만 원, 2026년 7월 3,282만, 8월 3,247만, 9월 4,597만 원">
+            <div class="chart__plot chart__plot--3">
+              <div class="pair"><div class="bar" style="height:66px"></div><div class="bar bar--hi" style="height:114px"><span class="bar__v">3,282만</span></div></div>
+              <div class="pair"><div class="bar" style="height:55px"></div><div class="bar bar--hi" style="height:113px"><span class="bar__v">3,247만</span></div></div>
+              <div class="pair"><div class="bar" style="height:51px"></div><div class="bar bar--hi" style="height:160px"><span class="bar__v">4,597만</span></div></div>
+            </div>
+            <div class="chart__axis chart__axis--3"><span>7월</span><span>8월</span><span>9월</span></div>
+          </div>
+          <div class="legend"><span><i style="background:var(--t-hint)"></i>2025년</span><span><i style="background:var(--t-strong)"></i>2026년</span></div>
+          <p class="chart__note">2025년 같은 달 1,902만·1,591만·1,453만 원</p>
+        </div>
+      </div>
+      <div class="grid grid--4">
+        <figure class="fig"><button class="shot shot--doc" type="button" data-zoom="assets/report-strategy-1.webp" data-cap="매출 성장 전략 보고서 · A4 11쪽"><img src="assets/report-strategy-1.webp" alt="매출 성장 전략 보고서 표지" loading="lazy"></button><figcaption><b>매출 성장 전략 보고서</b><span>센터 숫자·업계 흐름·입지로 12개월 실행 순서를 제안했어요</span></figcaption></figure>
+        <figure class="fig"><button class="shot shot--doc" type="button" data-zoom="assets/report-strategy-2.webp" data-cap="월별 매출 분석 · 2025년 1월~2026년 9월"><img src="assets/report-strategy-2.webp" alt="월별 매출 분석 페이지" loading="lazy"></button><figcaption><b>월별 매출 분석</b><span>21개월 매출을 부문별로 쌓아 성장의 출처를 보여 줬어요</span></figcaption></figure>
+        <figure class="fig"><button class="shot shot--doc" type="button" data-zoom="assets/report-weekend.webp" data-cap="7월 주말 업무 대표 보고"><img src="assets/report-weekend.webp" alt="7월 주말 업무 보고서" loading="lazy"></button><figcaption><b>주말 업무 대표 보고</b><span>주말 8일의 처리 업무 129건·문자·매출을 한 장으로 정리했어요</span></figcaption></figure>
+        <figure class="fig"><button class="shot shot--doc" type="button" data-zoom="assets/roadmap.webp" data-cap="6개월 로드맵과 결정할 것"><img src="assets/roadmap.webp" alt="6개월 로드맵" loading="lazy"></button><figcaption><b>6개월 로드맵</b><span>기간별 할 일·결정할 것·누가 맡는지까지 정리했어요</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 시간표·채널 -->
+    <section class="panel" id="p-channels" role="tabpanel" aria-labelledby="t-channels" hidden>
+      <header class="ph">
+        <p class="ph__eyebrow">2026.06 – 09 · 설계·제작</p>
+        <h2 class="ph__title">시간표는 한 번만 고치면,<br>모든 채널이 따라와요</h2>
+        <p class="ph__desc">월 시간표 데이터 하나에서 A4·네이버·당근·인스타·카카오용 이미지와 예약 앱 입력값이 만들어져요. 글자 잘림 검사를 통과해야 발행되고, 공지는 13칸 체크리스트로 하루 만에 9개 채널에 나가요.</p>
+      </header>
+      <div class="stats">
+        <div class="stat"><div class="stat__num">22개</div><div class="stat__label">한 번 수정으로 만드는 파일</div><div class="stat__note">A4·네이버·당근·인스타·카카오</div></div>
+        <div class="stat"><div class="stat__num">97 → 0건</div><div class="stat__label">예약 앱 입력 불일치</div><div class="stat__note">10월 스메 205회차·오붓 154건</div></div>
+        <div class="stat"><div class="stat__num">9개</div><div class="stat__label">하루에 게시한 채널</div><div class="stat__note">노션·스메·카카오·플레이스·당근 등</div></div>
+        <div class="stat"><div class="stat__num">14곳+</div><div class="stat__label">링크 하나로 갱신</div><div class="stat__note">매달 링크 대상만 바꿔요</div></div>
+      </div>
+      <div class="ba">
+        <div class="ba__card ba__card--before"><span class="badge badge--grey">도입 전</span><p class="ba__step">채널마다 손으로</p><p class="ba__text">채널마다 이미지를 따로 만들었어요. 갱신을 빠뜨린 6월엔 한 달 동안 옛 시간표로 안내했고, 10월 착수 때 오붓 121건 중 97건이 스메와 달랐어요.</p></div>
+        <svg class="ba__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <div class="ba__card ba__card--after"><span class="badge badge--green">지금</span><p class="ba__step">데이터 한 번 수정</p><p class="ba__text">파일 22개 자동 생성 → 잘림 검사 통과 후 발행 → 스메·오붓 입력 뒤 기대값과 대조해 차이 0을 확인해요.</p></div>
+      </div>
+      <div class="lh"><h3>결과물 샘플</h3><span>같은 데이터로 만든 10월 시간표</span></div>
+      <div class="grid grid--4">
+        <figure class="fig"><button class="tile" type="button" data-zoom="assets/tt-yoga-a4.webp" data-cap="10월 요가 시간표 · A4 인쇄용"><img src="assets/tt-yoga-a4.webp" alt="A4 요가 시간표" loading="lazy"></button><figcaption><b>A4 인쇄용</b><span>데스크·게시판에 붙이는 요가 시간표</span></figcaption></figure>
+        <figure class="fig"><button class="tile" type="button" data-zoom="assets/tt-yoga-insta.webp" data-cap="10월 요가 시간표 · 인스타 피드용"><img src="assets/tt-yoga-insta.webp" alt="인스타용 요가 시간표" loading="lazy"></button><figcaption><b>인스타 피드용</b><span>4:5 비율로 다시 짠 같은 시간표</span></figcaption></figure>
+        <figure class="fig"><button class="tile" type="button" data-zoom="assets/tt-yoga-naver.webp" data-cap="10월 요가 시간표 · 네이버용"><img src="assets/tt-yoga-naver.webp" alt="네이버용 요가 시간표" loading="lazy"></button><figcaption><b>네이버용</b><span>1:1 비율 · 플레이스 사진용</span></figcaption></figure>
+        <figure class="fig"><button class="tile" type="button" data-zoom="assets/tt-pilates-kakao.webp" data-cap="10월 필라테스 시간표 · 카카오용"><img src="assets/tt-pilates-kakao.webp" alt="카카오용 필라테스 시간표" loading="lazy"></button><figcaption><b>카카오용 · 필라테스</b><span>트랙별 수업을 색으로 나눴어요</span></figcaption></figure>
+      </div>
+      <div class="grid grid--1-2">
+        <figure class="fig"><button class="tile" type="button" data-zoom="assets/notice-holiday.webp" data-cap="대체공휴일·행사 운영 공지"><img src="assets/notice-holiday.webp" alt="휴강 운영 공지 이미지" loading="lazy"></button><figcaption><b>휴강·운영 공지</b><span>대체공휴일·행사 운영 안내도 같은 틀로 바로 만들어요</span></figcaption></figure>
+        <div>
+          <div class="lh" style="margin-top:0"><h3>발행 순서</h3></div>
+          <div class="rows" style="grid-template-columns:1fr">
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>시간표 데이터 수정</b><span>수업·강사·주차가 바뀌면 데이터 파일 하나만 고쳐요</span></p></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>채널별 이미지 22개 생성·잘림 검사</b><span>수업명이 잘리거나 겹치면 발행을 막아요</span></p></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>예약 앱 입력과 대조</b><span>스메·오붓 입력 뒤 기대값과 맞춰 봐요</span></p></div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>13칸 체크리스트로 게시</b><span>노션·스메·카카오·플레이스·당근·인스타·인쇄까지</span></p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 응대·발송 -->
+    <section class="panel" id="p-messages" role="tabpanel" aria-labelledby="t-messages" hidden>
+      <header class="ph">
+        <p class="ph__eyebrow">2026.05 – 10 · 설계·운영</p>
+        <h2 class="ph__title">많이 보내도 틀리지 않는 응대</h2>
+        <p class="ph__desc">첫 문의·가격·체험 확정·팔로우업까지 응대 문구 60여 개를 틀로 만들고, 가격·링크는 정본 값만 들어가게 했어요. 보내기 전에 <span class="nb">날짜·요일</span>·금액·금지 기호를 자동 검사하고, 서버 발송 완료까지 확인한 뒤 기록해요.</p>
+      </header>
+      <div class="stats">
+        <div class="stat"><div class="stat__num">2,068건</div><div class="stat__label">3개월 회원 문자</div><div class="stat__note">대부분 1:1 안내</div></div>
+        <div class="stat"><div class="stat__num">5건</div><div class="stat__label">검사기가 찾은 지난 오류</div><div class="stat__note">1,492건 재검사 → 이후 자동 차단</div></div>
+        <div class="stat"><div class="stat__num">543건</div><div class="stat__label">전날 리마인드 문자</div><div class="stat__note">매일 12시 명단·문구 자동 준비</div></div>
+        <div class="stat"><div class="stat__num">13곳 → 1줄</div><div class="stat__label">회원 이력 조회</div><div class="stat__note">10~15분 걸리던 조회를 한 줄로</div></div>
+      </div>
+      <div class="lh"><h3>문자 한 건이 나가는 길</h3><span>사고가 났던 지점마다 확인 단계를 넣었어요</span></div>
+      <ol class="flow">
+        <li>미리보기<small>문구·수신자 확인</small></li>
+        <li>문구 검사<small>날짜·금액·금지 기호</small></li>
+        <li>승인 후 발송<small>담당자 확인</small></li>
+        <li>서버 확인<small>발송 완료 조회</small></li>
+        <li>자동 기록<small>업무 연대기</small></li>
+      </ol>
+      <div class="lh"><h3>결과물 샘플</h3><span>실제 쓰던 틀과 검사 결과예요</span></div>
+      <div class="cards">
+        <div class="card">
+          <p class="card__label">문구 틀</p>
+          <p class="card__title">체험 예약 확정 안내</p>
+          <p class="card__desc">회색 칸만 채우면 돼요. 체험비·계좌·주소는 정본 값이 들어가요.</p>
+          <div class="bubble"><span class="var">{이름}</span> 님, 애프터 요가&amp;필라테스 서울숲점입니다.
+체험 예약이 확정되었습니다 :)
+
+[수업 안내]
+<span class="var">{날짜(요일)}</span> <span class="var">{시작}</span> ~ <span class="var">{종료}</span>
+<span class="var">{수업명}</span> / <span class="var">{강사}</span>
+전체 시간표: <span class="var">{이번 달 시간표 링크}</span>
+
+[결제 안내]
+체험비: <span class="var">{가격표 체험비}</span>
+방문 전에는 계좌이체로, 방문 당일에는 센터에서 카드 또는 현금으로 결제하실 수 있습니다.
+
+[방문 준비]
+<span class="var">{준비물·도착 시각}</span></div>
+        </div>
+        <div class="card">
+          <p class="card__label">발송 전 검사기</p>
+          <p class="card__title">틀린 문자는 나가기 전에 멈춰요</p>
+          <p class="card__desc">아래 문구를 넣으면 실제로 이렇게 잡아내요.</p>
+          <div class="bubble">회원님, 애프터 요가&amp;필라테스 서울숲점입니다.
+체험 예약이 확정되었습니다 :)
+
+[수업 안내]
+<span class="err">11월 3일(수)</span> 19:00 ~ 20:00
+하타 / 담당 강사
+체험비: 30,000원 <span class="err">—</span> 등록 시 전액 차감</div>
+          <div class="lint">
+            <div class="lint__row"><span class="badge badge--red">막음</span><span><b>요일 불일치</b> · 2026년 11월 3일은 화요일이에요</span></div>
+            <div class="lint__row"><span class="badge badge--red">막음</span><span><b>문자 금지 기호</b> · 대시(—) 대신 하이픈(-)으로 바꿔요</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lh"><h3>함께 만든 응대 도구</h3></div>
+      <div class="rows">
+        <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>신규 문의 확인 루틴</b><span>플레이스·톡톡·당근·카카오·오붓 등 7개 창구를 한 번에 점검하고 답장 초안까지</span></p></div>
+        <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>체험 추천 → 확정 문자</b><span>날짜를 넣으면 그날 열리는 수업만 추천, 승인 한 번에 예약·문자·명단 기록</span></p></div>
+        <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>회원 통합 조회</b><span>이름·번호 한 줄로 13곳의 이력을 시간순으로 모아 봐요</span></p></div>
+        <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>환불·홀딩 처리 기준</b><span>환불 산식과 손계산 재확인, 환불 안내 문구 11종</span></p></div>
+      </div>
+    </section>
+
+    <!-- 홍보·디자인 -->
+    <section class="panel" id="p-design" role="tabpanel" aria-labelledby="t-design" hidden>
+      <header class="ph">
+        <p class="ph__eyebrow">2026.04 – 10 · 기획·디자인</p>
+        <h2 class="ph__title">직접 기획하고 디자인한 홍보물</h2>
+        <p class="ph__desc">인스타·당근·네이버·홈페이지에 올린 홍보물과 공지를 AI 디자인 도구로 직접 기획하고 만들었어요. 애프터스트레칭 런칭 홍보와 웰니스 페스티벌(RESET DAYS), 체험·재등록 캠페인도 맡았어요.</p>
+      </header>
+      <div class="stats">
+        <div class="stat"><div class="stat__num">136건</div><div class="stat__label">3개월 외부 게시</div><div class="stat__note">인스타·당근·홈페이지·앱 공지</div></div>
+        <div class="stat"><div class="stat__num">2.1만 회</div><div class="stat__label">10월 인스타 조회</div><div class="stat__note">10월 1~23일, 인사이트 기준</div></div>
+        <div class="stat"><div class="stat__num">34종</div><div class="stat__label">수업 일러스트</div><div class="stat__note">요가 30 · 필라테스 4</div></div>
+        <div class="stat"><div class="stat__num">12종</div><div class="stat__label">대관 홍보 시안</div><div class="stat__note">공간 대관·협업 안내</div></div>
+      </div>
+      <div class="lh"><h3>결과물 샘플</h3><span>눌러서 크게 보기</span></div>
+      <div class="grid grid--3">
+        <figure class="fig"><button class="tile" type="button" data-zoom="assets/promo-festival.webp" data-cap="페스티벌 참가자 등록 혜택 · 인스타 4:5"><img src="assets/promo-festival.webp" alt="페스티벌 참가자 혜택 홍보물" loading="lazy"></button><figcaption><b>페스티벌 참가자 혜택</b><span>행사 참가자를 등록으로 잇는 인스타 피드</span></figcaption></figure>
+        <figure class="fig"><button class="tile" type="button" data-zoom="assets/promo-evening.webp" data-cap="퇴근 후 요가 체험 · 인스타 4:5"><img src="assets/promo-evening.webp" alt="퇴근 후 요가 체험 홍보물" loading="lazy"></button><figcaption><b>퇴근 후 요가 체험</b><span>성수 직장인을 겨냥한 저녁 수업 홍보</span></figcaption></figure>
+        <figure class="fig"><button class="tile" type="button" data-zoom="assets/promo-carryover.webp" data-cap="재등록 캠페인 시안 · 1:1"><img src="assets/promo-carryover.webp" alt="재등록 캠페인 시안" loading="lazy"></button><figcaption><b>재등록 캠페인 시안</b><span>남은 횟수를 이어 주는 재등록 혜택을 계산식으로 보여 줘요</span></figcaption></figure>
+      </div>
+      <div class="grid">
+        <figure class="fig"><div class="stage stage--one"><button class="phone-btn" type="button" data-zoom="assets/web-cta.webp" data-cap="애프터스트레칭 홈페이지 체험 안내 섹션 · 모바일"><div class="phone"><img src="assets/web-cta.webp" alt="홈페이지 체험 안내 섹션" loading="lazy"></div></button></div><figcaption><b>홈페이지 체험 안내 섹션</b><span>애프터스트레칭 런칭 때 만든 첫 방문 안내 화면</span></figcaption></figure>
+        <figure class="fig"><button class="shot" type="button" data-zoom="assets/insta-insights.webp" data-cap="10월 인스타그램 인사이트 · 10월 1~23일"><img src="assets/insta-insights.webp" alt="인스타그램 인사이트 화면" loading="lazy"></button><figcaption><b>10월 인스타 인사이트</b><span>10월 1~23일 조회 2.1만 회 · 운영하던 계정의 실제 화면이에요</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 인계·교육 -->
+    <section class="panel" id="p-handover" role="tabpanel" aria-labelledby="t-handover" hidden>
+      <header class="ph">
+        <p class="ph__eyebrow">2026.10 · 문서화</p>
+        <h2 class="ph__title">떠나도 멈추지 않게,<br>일하는 법을 문서로 남겼어요</h2>
+        <p class="ph__desc">3개월 업무 7,116건을 하루도 빠짐없이 한 줄씩 기록했어요. 다음 운영자가 매일·매주·매월 할 일과 놓치면 안 되는 기준을 바로 이어받도록 보고서·설명서·교육 자료로 정리했어요.</p>
+      </header>
+      <div class="stats">
+        <div class="stat"><div class="stat__num">23쪽</div><div class="stat__label">인수인계 보고서</div><div class="stat__note">유입·매출·체계·업무 총람</div></div>
+        <div class="stat"><div class="stat__num">28장</div><div class="stat__label">예약보드 사용 설명서</div><div class="stat__note">화면 그대로 따라 하기</div></div>
+        <div class="stat"><div class="stat__num">13장</div><div class="stat__label">주임 교육 자료</div><div class="stat__note">저녁 데스크 업무</div></div>
+        <div class="stat"><div class="stat__num">7,116건</div><div class="stat__label">3개월 업무 기록</div><div class="stat__note">93일 하루도 빠짐없이</div></div>
+      </div>
+      <div class="lh"><h3>결과물 샘플</h3><span>눌러서 크게 보기</span></div>
+      <div class="grid grid--4">
+        <figure class="fig"><button class="shot shot--doc" type="button" data-zoom="assets/handover-cover.webp" data-cap="인수인계 보고서 · 표지"><img src="assets/handover-cover.webp" alt="인수인계 보고서 표지" loading="lazy"></button><figcaption><b>보고서 표지</b><span>3개월 숫자와 만든 체계를 첫 장에</span></figcaption></figure>
+        <figure class="fig"><button class="shot shot--doc" type="button" data-zoom="assets/handover-milestones.webp" data-cap="3개월 이정표 30개"><img src="assets/handover-milestones.webp" alt="이정표 페이지" loading="lazy"></button><figcaption><b>이정표 30개</b><span>도구·가격·채용·캠페인을 날짜순으로</span></figcaption></figure>
+        <figure class="fig"><button class="shot shot--doc" type="button" data-zoom="assets/handover-routine.webp" data-cap="업무 총람 · 자동화가 멈추면 손으로 할 일"><img src="assets/handover-routine.webp" alt="업무 총람 페이지" loading="lazy"></button><figcaption><b>업무 총람</b><span>자동화가 멈췄을 때 손으로 하는 법까지</span></figcaption></figure>
+        <figure class="fig"><button class="shot shot--doc" type="button" data-zoom="assets/handover-redline.webp" data-cap="레드라인 · 한 번 어기면 되돌리기 어려운 일"><img src="assets/handover-redline.webp" alt="레드라인 페이지" loading="lazy"></button><figcaption><b>레드라인 30</b><span>돈·법·발송에서 절대 놓치면 안 되는 기준</span></figcaption></figure>
+      </div>
+      <div class="grid">
+        <figure class="fig"><button class="shot" type="button" data-zoom="assets/manual-cover.webp" data-cap="바른 예약보드 사용 설명서 · 표지"><img src="assets/manual-cover.webp" alt="예약보드 사용 설명서 표지" loading="lazy"></button><figcaption><b>예약보드 사용 설명서</b><span>강사가 체험 접수부터 자리 열기까지 혼자 익혀요</span></figcaption></figure>
+        <figure class="fig"><button class="shot" type="button" data-zoom="assets/manual-flow.webp" data-cap="설명서 본문 · 화면 그대로 따라 하기"><img src="assets/manual-flow.webp" alt="설명서 본문 페이지" loading="lazy"></button><figcaption><b>설명서 본문</b><span>순서 번호와 실제 화면을 나란히 놓았어요</span></figcaption></figure>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="wrap foot">
+  <span>숫자 출처 · 서울숲점 매출 원장·예약 장부·업무 연대기 조회값(2026년 10월). 매출은 담당 지점 결제 금액(환불 차감) 기준이고, 샘플 화면의 회원 정보는 모두 가렸어요.</span>
+  <span class="foot__right">2026.11 · 박민규</span>
+</footer>
+
+<div class="lb" hidden role="dialog" aria-modal="true" aria-label="크게 보기">
+  <figure><img alt=""><figcaption></figcaption></figure>
+  <button class="btn btn--light-weak lb__close" type="button">닫기</button>
+</div>
+
+<script>
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+  function select(id, opts = {}) {
+    tabs.forEach(t => {
+      const on = t.dataset.tab === id;
+      t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1;
+      if (on) { t.scrollIntoView({ inline: 'center', block: 'nearest' }); if (opts.focus) t.focus(); }
+    });
+    panels.forEach(p => { p.hidden = p.id !== 'p-' + id; });
+    if (opts.push) history.replaceState(null, '', '#' + id);
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t.dataset.tab, { push: true }));
+    t.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+      select(next.dataset.tab, { push: true, focus: true });
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => {
+    select(b.dataset.go, { push: true });
+    document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
+  }));
+  const start = location.hash.slice(1);
+  select(tabs.some(t => t.dataset.tab === start) ? start : 'overview');
+  if (!start) window.scrollTo(0, 0);
+  window.addEventListener('hashchange', () => {
+    const h = location.hash.slice(1);
+    if (tabs.some(t => t.dataset.tab === h)) select(h);
+  });
+
+  // 크게 보기
+  const lb = document.querySelector('.lb'), lbImg = lb.querySelector('img'), lbCap = lb.querySelector('figcaption');
+  let opener = null;
+  document.addEventListener('click', e => {
+    const z = e.target.closest('[data-zoom]');
+    if (!z) return;
+    opener = z; lbImg.src = z.dataset.zoom; lbImg.alt = z.dataset.cap || ''; lbCap.textContent = z.dataset.cap || '';
+    lb.hidden = false; document.body.style.overflow = 'hidden'; lb.querySelector('.lb__close').focus();
+  });
+  function closeLb() { lb.hidden = true; document.body.style.overflow = ''; lbImg.removeAttribute('src'); if (opener) opener.focus(); }
+  lb.addEventListener('click', e => { if (e.target === lb || e.target.closest('.lb__close')) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+</script>
+</body>
+</html>

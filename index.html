@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>박민규 · 늘 만드는 빌더</title>
+<meta name="description" content="늘 직접 만들고, 만든 것으로 매출·런칭·업무 효율·데이터·SNS 홍보를 키운 박민규의 이력서">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root {
+    --bg: #ffffff; --bg-grey: #f2f4f6; --line: #e5e8eb; --hairline: rgba(0,0,33,.07);
+    --t-strong: #191f28; --t-title: #333d4b; --t-body: #4e5968; --t-sub: #6b7684; --t-hint: #b0b8c1; --g300: #d1d6db;
+    --blue: #3182f6; --blue-hover: #1b64da; --blue-weak-bg: #e8f3ff; --blue-weak-hover: #d6e8ff; --blue-text: #1b64da;
+    --dark: #191f28; --dark-sub: #b0b8c1; --dark-hint: #8b95a1; --dark-blue: #64a8ff;
+    --shadow-float: 0 16px 60px rgba(0,29,58,.18); --shadow-soft: 0 8px 28px rgba(0,29,58,.10);
+    --wrap: 1120px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+                 'Apple SD Gothic Neo', Roboto, 'Noto Sans KR', sans-serif;
+    font-size: 17px; font-weight: 400; line-height: 1.6; color: var(--t-strong); background: var(--bg);
+    word-break: keep-all; overflow-wrap: break-word; -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  ul, ol { list-style: none; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+  .pt { color: var(--blue); }
+  section[id] { scroll-margin-top: 64px; }
+
+  /* 버튼 */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px; padding: 0 20px;
+         border-radius: 14px; font-size: 17px; font-weight: 600; line-height: 1.25; white-space: nowrap; transition: background .15s; }
+  .btn--sm { min-height: 38px; padding: 0 14px; border-radius: 10px; font-size: 15px; }
+  .btn--lg { min-height: 56px; padding: 0 24px; border-radius: 16px; }
+  .btn--primary { background: var(--blue); color: #fff; }
+  .btn--primary:hover { background: var(--blue-hover); }
+  .btn--weak { background: var(--blue-weak-bg); color: var(--blue-text); }
+  .btn--weak:hover { background: var(--blue-weak-hover); }
+
+  /* 상단 바 */
+  .nav { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.88);
+         -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px); border-bottom: 1px solid var(--hairline); }
+  .nav__in { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .brand img { width: 32px; height: 32px; border-radius: 50%; }
+  .brand b { font-size: 17px; font-weight: 700; color: var(--t-strong); }
+  .brand span { font-size: 15px; color: var(--t-sub); white-space: nowrap; }
+  .nav__links { display: flex; gap: 2px; }
+  .nav__links a { padding: 8px 12px; border-radius: 10px; font-size: 15px; font-weight: 500; color: var(--t-sub); transition: color .15s, background .15s; }
+  .nav__links a:hover { background: var(--bg-grey); color: var(--t-title); }
+  .nav__links a.is-on { color: var(--t-strong); font-weight: 700; }
+
+  /* 첫 화면 */
+  .hero { padding: 72px 0 0; }
+  .hero__in { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr); gap: 56px; align-items: center; }
+  .who { display: inline-flex; align-items: center; gap: 12px; padding: 6px 18px 6px 6px; border-radius: 999px; background: var(--bg-grey); }
+  .who img { width: 44px; height: 44px; border-radius: 50%; }
+  .who b { display: block; font-size: 15px; font-weight: 700; line-height: 1.35; }
+  .who span { display: block; font-size: 13px; line-height: 1.35; color: var(--t-body); }
+  .hero__title { margin-top: 24px; font-size: clamp(34px, 4.6vw, 54px); line-height: 1.22; font-weight: 700; letter-spacing: -0.025em; }
+  .hero__desc { margin-top: 20px; max-width: 32em; font-size: 18px; line-height: 1.7; color: var(--t-body); }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .hero__contact { margin-top: 16px; font-size: 15px; color: var(--t-sub); }
+  .hero__stage { position: relative; height: 560px; border-radius: 32px; background: var(--blue-weak-bg); overflow: hidden; }
+  .phone { padding: 6px; border-radius: 36px; background: var(--t-strong); box-shadow: var(--shadow-float); }
+  .phone img { width: 100%; aspect-ratio: 780 / 1688; object-fit: cover; object-position: top; border-radius: 30px; background: #fff; }
+  .hero__stage .phone { position: absolute; }
+  .phone--front { width: 238px; left: 13%; top: 64px; z-index: 2; }
+  .phone--back { width: 220px; right: 5%; top: 132px; }
+  /* 첫 화면 — 아이폰 '받은 메시지' 말풍선(연회색·검은 글씨·왼쪽 아래 꼬리) */
+  .chat { position: absolute; z-index: 3; left: 7%; bottom: 34px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+          filter: drop-shadow(0 2px 8px rgba(0,29,58,.10)); }
+  .msg { position: relative; max-width: 340px; padding: 9px 15px 10px; border-radius: 20px; border-bottom-left-radius: 6px;
+         background: #e9e9eb; color: #000; font-size: 16px; line-height: 1.4; letter-spacing: -0.01em; }
+  .msg b { font-weight: 700; }
+  .msg::before { content: ''; position: absolute; left: -7px; bottom: 0; width: 18px; height: 16px; background: #e9e9eb;
+                 clip-path: path('M18 0C18 9 12.5 15 0 16H18Z'); }
+
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 56px; padding: 32px 0; background: var(--bg-grey); border-radius: 24px; }
+  .stat { position: relative; padding: 0 32px; }
+  .stat + .stat::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 1px; background: var(--line); }
+  .stat__num { font-size: clamp(28px, 3vw, 34px); line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; color: var(--blue); font-variant-numeric: tabular-nums; }
+  .stat__label { margin-top: 6px; font-size: 15px; line-height: 1.4; font-weight: 600; color: var(--t-title); }
+  .stat__note { margin-top: 2px; font-size: 13px; line-height: 1.5; color: var(--t-body); }
+
+  /* 섹션 공통 */
+  .sec { padding: 120px 0; }
+  .sec--grey { background: var(--bg-grey); }
+  .sec--dark { background: var(--dark); color: #fff; }
+  .sec__head { max-width: 760px; margin-bottom: 48px; }
+  .eyebrow { display: block; font-size: 15px; line-height: 1.5; font-weight: 700; color: var(--blue); }
+  .sec__title { margin-top: 10px; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.3; font-weight: 700; letter-spacing: -0.02em; color: var(--t-strong); }
+  .sec__desc { margin-top: 14px; font-size: 18px; line-height: 1.7; color: var(--t-body); }
+  .sec--dark .eyebrow { color: var(--dark-blue); }
+  .sec--dark .sec__title { color: #fff; }
+  .sec--dark .sec__desc { color: var(--dark-sub); }
+
+  /* 함께 일하면 */
+  .gains { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .gain { display: flex; flex-direction: column; padding: 32px 28px 28px; border-radius: 24px; background: var(--bg-grey); }
+  .gain__ic { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: #fff; color: var(--blue); }
+  .gain__ic svg { width: 24px; height: 24px; }
+  .gain__title { margin-top: 20px; font-size: 22px; line-height: 1.4; font-weight: 700; color: var(--t-strong); }
+  .gain__desc { margin-top: 8px; font-size: 16px; line-height: 1.65; color: var(--t-body); }
+  .gain__fig { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); }
+  .gain__desc { margin-bottom: 20px; }
+  .gain__num { display: block; font-size: 26px; line-height: 1.3; font-weight: 700; letter-spacing: -0.02em; color: var(--t-strong); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .gain__lbl { display: block; margin-top: 2px; font-size: 14px; line-height: 1.5; color: var(--t-body); }
+
+  /* AI로 일하는 방식 */
+  .flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; counter-reset: step; }
+  .step { padding: 28px 24px 26px; border-radius: 24px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+  .step__top { display: flex; align-items: center; justify-content: space-between; }
+  .step__icon { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 14px; background: var(--blue); color: #fff; }
+  .step__icon svg { width: 24px; height: 24px; }
+  .step__no { font-size: 15px; font-weight: 700; color: var(--dark-blue); font-variant-numeric: tabular-nums; }
+  .step__title { margin-top: 20px; font-size: 20px; line-height: 1.4; font-weight: 700; color: #fff; }
+  .step__desc { margin-top: 8px; font-size: 15px; line-height: 1.65; color: var(--dark-sub); }
+  .tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .tool { padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.08); font-size: 14px; line-height: 1.4; font-weight: 500; color: #d1d6db; }
+  .tool--ai { background: rgba(49,130,246,.24); color: #a9cdff; font-weight: 700; }
+  .proofs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,.12); }
+  .proof__num { font-size: clamp(28px, 3vw, 36px); line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; color: #fff; font-variant-numeric: tabular-nums; }
+  .proof__lbl { margin-top: 6px; font-size: 15px; line-height: 1.4; font-weight: 600; color: #e5e8eb; }
+  .proof__note { margin-top: 2px; font-size: 13px; line-height: 1.5; color: var(--dark-hint); }
+  .guard { display: flex; align-items: center; gap: 10px; margin-top: 40px; padding: 16px 20px; border-radius: 16px;
+           background: rgba(255,255,255,.06); font-size: 15px; line-height: 1.5; color: #e5e8eb; }
+  .guard svg { flex: none; width: 20px; height: 20px; color: var(--dark-blue); }
+  .skills { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; margin-top: 64px; }
+  .skills__head { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .skills__head h3 { font-size: 20px; font-weight: 700; color: #fff; }
+  .skills__head span { font-size: 14px; color: var(--dark-hint); }
+  .skill h4 { font-size: 16px; font-weight: 700; color: #fff; }
+  .skill li { margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--dark-sub); }
+
+  /* 대표 사례 */
+  .case { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 56px; align-items: center; }
+  .case__stage { display: flex; justify-content: center; align-items: center; gap: 18px; height: 540px; padding: 0 28px;
+                 border-radius: 32px; background: var(--bg-grey); overflow: hidden; }
+  .case__stage .phone { flex: none; width: 31%; }
+  .case__stage .phone { padding: 4px; border-radius: 26px; }
+  .case__stage .phone img { border-radius: 22px; }
+  .case__num { display: block; font-size: clamp(44px, 5vw, 60px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; color: var(--blue); font-variant-numeric: tabular-nums; }
+  .case__lbl { margin-top: 8px; font-size: 19px; line-height: 1.45; font-weight: 700; color: var(--t-title); }
+  .case__note { margin-top: 10px; font-size: 16px; line-height: 1.65; color: var(--t-body); }
+  .facts { margin-top: 28px; border-top: 1px solid var(--line); }
+  .facts div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line);
+               font-size: 16px; line-height: 1.5; color: var(--t-body); }
+  .facts b { flex: none; font-weight: 700; color: var(--t-strong); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .link { display: inline-flex; align-items: center; gap: 4px; margin-top: 22px; font-size: 16px; font-weight: 700; color: var(--blue-text); }
+  .link svg { width: 18px; height: 18px; }
+  .ba { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); margin-top: 56px; }
+  .ba__card { padding: 28px 30px; border-radius: 24px; }
+  .ba__card--before { background: var(--bg-grey); }
+  .ba__card--after { background: var(--blue-weak-bg); }
+  .ba__tag { font-size: 15px; font-weight: 700; color: var(--t-body); }
+  .ba__tag--pt { color: var(--blue-text); }
+  .ba__title { margin-top: 6px; font-size: 22px; line-height: 1.4; font-weight: 700; color: var(--t-strong); }
+  .ba__card p { margin-top: 8px; font-size: 16px; line-height: 1.65; color: var(--t-body); }
+  .ba__arrow { align-self: center; justify-self: center; width: 28px; height: 28px; color: var(--blue); }
+  .wide { margin-top: 40px; }
+  .wide button { display: block; width: 100%; overflow: hidden; border-radius: 20px; border: 1px solid var(--line); box-shadow: var(--shadow-soft); }
+  .wide figcaption { margin-top: 12px; font-size: 14px; color: var(--t-sub); text-align: center; }
+
+  /* 결과물 */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .filter { padding: 10px 18px; border-radius: 999px; background: #fff; border: 1px solid var(--line);
+            font-size: 15px; line-height: 1.4; font-weight: 600; color: var(--t-body); transition: background .15s, color .15s, border-color .15s; }
+  .filter:hover { border-color: var(--g300); color: var(--t-title); }
+  .filter[aria-pressed="true"] { background: var(--t-strong); border-color: var(--t-strong); color: #fff; }
+  .gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .card { display: flex; flex-direction: column; width: 100%; text-align: left; border-radius: 20px; background: #fff; overflow: hidden;
+          transition: transform .2s ease, box-shadow .2s ease; }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+  .card[hidden] { display: none; }
+  .card__img { flex: none; min-height: 0; display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 5;
+              padding: 22px; background: #fff; overflow: hidden; }
+  .card__img img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 6px; box-shadow: 0 6px 22px rgba(0,29,58,.12); }
+  .card__img--phone img { border-radius: 14px; }
+  .card__body { padding: 14px 18px 18px; border-top: 1px solid var(--hairline); }
+  .card__cat { display: block; font-size: 13px; line-height: 1.5; font-weight: 600; color: var(--blue-text); }
+  .card__title { display: block; margin-top: 2px; font-size: 16px; line-height: 1.45; font-weight: 700; color: var(--t-strong); }
+
+  /* 경력 */
+  .timeline { position: relative; }
+  .tl { position: relative; display: grid; grid-template-columns: 168px 40px minmax(0, 1fr); grid-template-areas: "when dot body"; padding-bottom: 36px; }
+  .tl::before { content: ''; position: absolute; left: 187px; top: 8px; bottom: -8px; width: 2px; background: var(--line); }
+  .tl:last-child::before { display: none; }
+  .tl__when { grid-area: when; padding-top: 2px; }
+  .tl__when b { display: block; font-size: 15px; line-height: 1.45; font-weight: 700; color: var(--t-title); font-variant-numeric: tabular-nums; }
+  .tl__when span { display: block; font-size: 13px; line-height: 1.5; color: var(--t-sub); }
+  .tl__dot { grid-area: dot; position: relative; z-index: 1; justify-self: center; width: 14px; height: 14px; margin-top: 6px; border-radius: 50%;
+             background: #fff; border: 3px solid var(--g300); }
+  .tl__body { grid-area: body; }
+  .tl__org { font-size: 19px; line-height: 1.45; font-weight: 700; color: var(--t-strong); }
+  .tl__role { margin-left: 8px; font-size: 15px; font-weight: 500; color: var(--t-sub); }
+  .tl__body ul { margin-top: 6px; }
+  .tl__body li { position: relative; padding-left: 14px; font-size: 16px; line-height: 1.65; color: var(--t-body); }
+  .tl__body li + li { margin-top: 2px; }
+  .tl__body li::before { content: ''; position: absolute; left: 2px; top: .72em; width: 5px; height: 5px; border-radius: 50%; background: var(--t-hint); }
+  .tl--now .tl__dot { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 0 6px var(--blue-weak-bg); }
+  .tl--now .tl__body { padding: 24px 28px; border-radius: 24px; background: var(--blue-weak-bg); }
+  .tl--now .tl__body li::before { background: var(--blue); }
+  .badge { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 10px; background: #fff; font-size: 13px; font-weight: 700; color: var(--blue-text); vertical-align: 2px; }
+  .past { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--line); }
+  .past__head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 24px; }
+  .past__head h3 { font-size: 22px; line-height: 1.4; font-weight: 700; color: var(--t-strong); }
+  .past__head > span { font-size: 14px; color: var(--t-sub); }
+  .gallery--past .card, .gallery--past .card__img { background: var(--bg-grey); }
+  .more { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 40px; padding-top: 48px; border-top: 1px solid var(--line); }
+  .more h3 { margin-bottom: 8px; font-size: 19px; font-weight: 700; color: var(--t-strong); }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; font-size: 16px; line-height: 1.5; color: var(--t-title); }
+  .row + .row { border-top: 1px solid var(--line); }
+  .row span:last-child { flex: none; color: var(--t-sub); font-variant-numeric: tabular-nums; }
+
+  /* 마무리 */
+  .cta { padding: 112px 0; background: var(--bg-grey); text-align: center; }
+  .cta__me { width: 96px; height: 96px; margin: 0 auto; border-radius: 50%; box-shadow: var(--shadow-soft); }
+  .cta__title { margin-top: 24px; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.3; font-weight: 700; letter-spacing: -0.02em; }
+  .cta__desc { max-width: 34em; margin: 14px auto 0; font-size: 18px; line-height: 1.7; color: var(--t-body); }
+  .cta__btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .cta__links { margin-top: 24px; font-size: 15px; color: var(--t-sub); }
+  .cta__links a { font-weight: 600; color: var(--t-body); }
+  .cta__links a:hover { color: var(--blue-text); }
+  .foot { padding: 32px 0 48px; font-size: 13px; line-height: 1.6; color: var(--t-sub); }
+  .foot .wrap { display: flex; justify-content: space-between; gap: 24px; }
+  .foot p:last-child { flex: none; }
+
+  /* 크게 보기 */
+  .lb { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 72px 24px 24px; background: rgba(25,31,40,.92); }
+  .lb[hidden] { display: none; }
+  .lb figure { display: flex; flex-direction: column; align-items: center; max-width: min(1100px, 100%); }
+  .lb img { max-width: 100%; max-height: calc(100vh - 160px); object-fit: contain; border-radius: 12px; background: #fff; }
+  .lb figcaption { margin-top: 14px; font-size: 15px; color: #fff; text-align: center; }
+  .lb__close { position: absolute; top: 16px; right: 16px; }
+  .btn--dark-weak { background: rgba(222,222,255,.19); color: #fff; }
+
+  /* 스크롤 등장 — 스크립트가 있을 때만 숨겼다가 보인다 */
+  .js .rv { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .js .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .rv { opacity: 1; transform: none; transition: none; }
+    .card, .card:hover { transition: none; transform: none; }
+  }
+  html.export .rv { opacity: 1 !important; transform: none !important; transition: none !important; }
+  html.export .nav { position: static; }
+  @media print {
+    .js .rv { opacity: 1; transform: none; }
+    .nav { position: static; }
+  }
+
+  @media (max-width: 960px) {
+    .nav__links { display: none; }
+    .hero { padding-top: 48px; }
+    .hero__in { grid-template-columns: 1fr; gap: 40px; }
+    .hero__stage { height: 500px; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+    .stat:nth-child(3)::before { display: none; }
+    .sec { padding: 88px 0; }
+    .gains { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .proofs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .case { grid-template-columns: 1fr; gap: 40px; }
+    .case__stage { height: 480px; }
+    .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 540px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 16px; }
+    .nav__in { height: 56px; }
+    section[id] { scroll-margin-top: 56px; }
+    .brand span { display: none; }
+    .hero__desc, .sec__desc, .cta__desc { font-size: 16px; }
+    .hero__cta .btn { flex: 1 1 auto; }
+    .hero__stage { height: 420px; border-radius: 24px; }
+    .phone { padding: 5px; border-radius: 26px; }
+    .phone img { border-radius: 21px; }
+    .phone--front { width: 176px; left: 7%; top: 56px; }
+    .phone--back { width: 160px; right: 5%; top: 104px; }
+    .chat { left: 5%; bottom: 18px; gap: 8px; }
+    .msg { max-width: 252px; padding: 7px 12px 8px; border-radius: 17px; border-bottom-left-radius: 5px; font-size: 14px; }
+    .stats { margin-top: 40px; padding: 24px 0; border-radius: 20px; }
+    .stat { padding: 0 18px; }
+    .sec { padding: 72px 0; }
+    .sec__head { margin-bottom: 32px; }
+    .gains { grid-template-columns: 1fr; gap: 12px; }
+    .gain { padding: 24px 22px 22px; border-radius: 20px; }
+    .gain__title { font-size: 20px; }
+    .flow { grid-template-columns: 1fr; gap: 12px; }
+    .proofs { gap: 24px 16px; margin-top: 40px; padding-top: 32px; }
+    .guard { align-items: flex-start; }
+    .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; margin-top: 48px; }
+    .skills__head { flex-direction: column; gap: 2px; }
+    .case__stage { height: 340px; gap: 10px; padding: 0 14px; border-radius: 24px; }
+    .case__stage .phone { padding: 3px; border-radius: 17px; }
+    .case__stage .phone img { border-radius: 14px; }
+    .facts div { font-size: 15px; }
+    .ba { grid-template-columns: 1fr; gap: 12px; margin-top: 40px; }
+    .ba__arrow { transform: rotate(90deg); }
+    .ba__card { padding: 22px; border-radius: 20px; }
+    .ba__title { font-size: 19px; }
+    .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .card { border-radius: 16px; }
+    .card__img { padding: 14px; }
+    .card__body { padding: 12px 14px 14px; }
+    .card__title { font-size: 15px; }
+    .tl { grid-template-columns: 28px minmax(0, 1fr); grid-template-areas: "dot when" "dot body"; padding-bottom: 28px; }
+    .tl::before { left: 13px; }
+    .tl__dot { justify-self: center; }
+    .tl__when { display: flex; gap: 8px; align-items: baseline; padding: 0 0 4px; }
+    .tl__org { font-size: 18px; }
+    .tl__role { display: block; margin: 0; }
+    .tl--now .tl__body { padding: 20px; border-radius: 20px; }
+    .more { grid-template-columns: 1fr; gap: 32px; }
+    .past { margin-top: 40px; padding-top: 32px; }
+    .past__head { flex-direction: column; gap: 4px; }
+    .past__head h3 { font-size: 19px; }
+    .row { font-size: 15px; }
+    .cta { padding: 80px 0; }
+    .cta__btns .btn { flex: 1 1 100%; }
+    .foot .wrap { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="#top"><img src="photo/avatar.webp" alt=""><b>박민규</b><span>늘 만드는 빌더</span></a>
+    <nav class="nav__links" aria-label="섹션">
+      <a href="#value">함께 일하면</a><a href="#ai">AI로 일하는 방식</a><a href="#case">대표 사례</a><a href="#works">결과물</a><a href="#career">경력</a>
+    </nav>
+    <a class="btn btn--primary btn--sm" href="mailto:pierce.park.83@gmail.com">연락하기</a>
+  </div>
+</header>
+
+<main>
+  <!-- 첫 화면 -->
+  <section class="hero" id="top">
+    <div class="wrap hero__in">
+      <div class="hero__text">
+        <span class="who"><img src="photo/avatar.webp" alt="박민규 아바타"><span><b>박민규 Pierce Park</b><span>늘 만드는 빌더</span></span></span>
+        <h1 class="hero__title">필요한 건 직접 만들고,<br>만든 걸로 <span class="pt">성과</span>를 내요</h1>
+        <p class="hero__desc">13년 동안 어디서든 늘 만드는 사람이었어요. 만든 것으로 매출 향상·프로그램 런칭·업무 효율화·데이터 분석·SNS 홍보에 기여했고, 지금은 Claude Code와 Codex로 더 크게, 더 빨리 만들어요.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="mailto:pierce.park.83@gmail.com">메일 보내기</a>
+          <a class="btn btn--weak" href="resume.pdf">PDF 이력서 보기</a>
+        </div>
+        <p class="hero__contact">010-3093-0375 · pierce.park.83@gmail.com</p>
+      </div>
+      <div class="hero__stage" aria-hidden="true">
+        <div class="phone phone--back"><img src="assets/board-consult.webp" alt=""></div>
+        <div class="phone phone--front"><img src="assets/board-day.webp" alt=""></div>
+        <div class="chat">
+          <p class="msg">개발자 3명이 5개월 걸릴 예약 시스템, <b>AI로 혼자</b> 만들었어요</p>
+          <p class="msg">예약 처리는 <b>4단계 → 1단계</b>로 줄였어요</p>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="stats rv" aria-label="한눈에 보는 박민규">
+        <div class="stat"><div class="stat__num">13년</div><div class="stat__label">현장 경력</div><div class="stat__note">교육·영업·컨설팅·창업·운영</div></div>
+        <div class="stat"><div class="stat__num">31개</div><div class="stat__label">직접 쓴 AI 업무 매뉴얼</div><div class="stat__note">예약·정산·응대·디자인 절차</div></div>
+        <div class="stat"><div class="stat__num">2.2배</div><div class="stat__label">담당 지점 매출</div><div class="stat__note">2026년 7~9월, 전년 같은 기간 대비</div></div>
+        <div class="stat"><div class="stat__num">805명</div><div class="stat__label">와디즈 펀딩 서포터</div><div class="stat__note">직접 만든 상품으로 · 코리앤더</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 함께 일하면 -->
+  <section class="sec" id="value">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <span class="eyebrow">함께 일하면</span>
+        <h2 class="sec__title">이렇게 달라져요</h2>
+        <p class="sec__desc">숫자는 모두 실제 기록이에요.</p>
+      </div>
+      <div class="gains">
+        <article class="gain rv">
+          <span class="gain__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
+          <h3 class="gain__title">매출을 키워요</h3>
+          <p class="gain__desc">상담부터 등록·재등록까지 고객 흐름을 숫자로 보고, 막히는 곳을 고쳐요.</p>
+          <div class="gain__fig"><span class="gain__num">1억 1,125만 원</span><span class="gain__lbl">2026년 7~9월 담당 지점 매출 · 전년 4,946만 원</span></div>
+        </article>
+        <article class="gain rv">
+          <span class="gain__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8c3.4 1.6 5.4 5.1 4.9 9l-2.4 2.4H9.5L7.1 11.8c-.5-3.9 1.5-7.4 4.9-9z"/><circle cx="12" cy="8.8" r="1.6"/><path d="M9.5 14.2L7.2 18.6l3.1-1.2M14.5 14.2l2.3 4.4-3.1-1.2"/></svg></span>
+          <h3 class="gain__title">새 프로그램을 런칭해요</h3>
+          <p class="gain__desc">기획·가격·예약·정산·홍보까지 한 사람이 끝까지 맡아요.</p>
+          <div class="gain__fig"><span class="gain__num">58%</span><span class="gain__lbl">애프터스트레칭 런칭 5개월 만의 지점 매출 비중</span></div>
+        </article>
+        <article class="gain rv">
+          <span class="gain__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg></span>
+          <h3 class="gain__title">반복하던 일을 줄여요</h3>
+          <p class="gain__desc">중계·입력·조회처럼 매번 손이 가던 일을 도구로 옮겨요.</p>
+          <div class="gain__fig"><span class="gain__num">13곳 → 1줄</span><span class="gain__lbl">회원 이력 조회 · 10~15분 걸리던 일</span></div>
+        </article>
+        <article class="gain rv">
+          <span class="gain__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><path d="M7 16v-4M12 16V7M17 16v-6"/></svg></span>
+          <h3 class="gain__title">데이터로 판단해요</h3>
+          <p class="gain__desc">장부끼리 대조하고 대시보드로 보여, 실수와 기회를 먼저 찾아요.</p>
+          <div class="gain__fig"><span class="gain__num">170만 원</span><span class="gain__lbl">장부 대조로 찾아낸 정산 오류</span></div>
+        </article>
+        <article class="gain rv">
+          <span class="gain__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4a1 1 0 0 0 1 1h2l6 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16.5 9.5a3.5 3.5 0 0 1 0 5M19 7a7 7 0 0 1 0 10"/></svg></span>
+          <h3 class="gain__title">SNS로 알려요</h3>
+          <p class="gain__desc">홍보물과 게시물을 직접 만들어 채널마다 맞춰 내보내요.</p>
+          <div class="gain__fig"><span class="gain__num">136건</span><span class="gain__lbl">3개월 외부 게시 · 인스타·당근·홈페이지</span></div>
+        </article>
+        <article class="gain rv">
+          <span class="gain__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2.5L4.5 13.5h6.5l-1 8 8.5-11h-6.5l1-8z"/></svg></span>
+          <h3 class="gain__title">모두 직접 만들어요</h3>
+          <p class="gain__desc">필요한 도구는 기다리지 않고 AI로 바로 만들어요.</p>
+          <div class="gain__fig"><span class="gain__num">25종+</span><span class="gain__lbl">직접 만든 운영 도구·화면 · 외부 개발비 0원</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI로 일하는 방식 -->
+  <section class="sec sec--dark" id="ai">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <span class="eyebrow">AI로 일하는 방식</span>
+        <h2 class="sec__title">혼자서도 팀처럼,<br>AI와 함께 만들어요</h2>
+        <p class="sec__desc">Claude Code와 Codex를 기획·개발·디자인·검수 담당처럼 나눠 쓰고, 결정과 책임은 제가 맡아요. 작은 조직의 AI 전환(AX)을 문제 찾기부터 인계까지 직접 해 봤어요.</p>
+      </div>
+      <ol class="flow">
+        <li class="step rv">
+          <div class="step__top"><span class="step__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5l5 5"/></svg></span><span class="step__no">01</span></div>
+          <h3 class="step__title">현장에서 찾아요</h3>
+          <p class="step__desc">반복되거나 자주 틀리는 일을 기록에서 찾아요.</p>
+        </li>
+        <li class="step rv">
+          <div class="step__top"><span class="step__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5"/></svg></span><span class="step__no">02</span></div>
+          <h3 class="step__title">AI와 만들어요</h3>
+          <p class="step__desc">웹 도구와 자동화 스크립트를 직접 설계하고 구현해요.</p>
+        </li>
+        <li class="step rv">
+          <div class="step__top"><span class="step__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-3 7.9-7 9-4-1.1-7-4.7-7-9V6l7-3z"/><path d="M8.8 12.2l2.3 2.3 4.3-4.6"/></svg></span><span class="step__no">03</span></div>
+          <h3 class="step__title">코드로 검증해요</h3>
+          <p class="step__desc">날짜·금액·문구를 자동 검사하고, 테스트를 통과해야 배포해요.</p>
+        </li>
+        <li class="step rv">
+          <div class="step__top"><span class="step__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h7.5l4 4v12.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5z"/><path d="M14 3.5V8h4M9 12.5h6M9 16h4"/></svg></span><span class="step__no">04</span></div>
+          <h3 class="step__title">매뉴얼로 남겨요</h3>
+          <p class="step__desc">절차를 AI 매뉴얼로 써서, 누가 해도 같은 결과가 나와요. 지금 31개예요.</p>
+        </li>
+      </ol>
+      <div class="tools rv" aria-label="함께 쓰는 도구">
+        <span class="tool tool--ai">Claude Code</span><span class="tool tool--ai">Codex</span><span class="tool">Notion</span><span class="tool">Google Sheets</span><span class="tool">Gmail</span><span class="tool">Slack</span><span class="tool">Figma</span><span class="tool">문자 발송 API</span>
+      </div>
+      <div class="proofs">
+        <div class="proof rv"><div class="proof__num">543건</div><div class="proof__lbl">전날 리마인드 자동 준비</div><div class="proof__note">매일 12시 명단·문구 준비</div></div>
+        <div class="proof rv"><div class="proof__num">9개</div><div class="proof__lbl">하루에 게시한 채널</div><div class="proof__note">노션·카카오·플레이스·당근 등</div></div>
+        <div class="proof rv"><div class="proof__num">14곳+</div><div class="proof__lbl">링크 하나로 갱신</div><div class="proof__note">매달 링크 대상만 바꿔요</div></div>
+        <div class="proof rv"><div class="proof__num">7,116건</div><div class="proof__lbl">자동으로 쌓인 업무 기록</div><div class="proof__note">93일 하루도 빠짐없이</div></div>
+      </div>
+      <p class="guard rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7"/></svg>밖으로 나가는 문자·결제·게시는 제가 승인해야만 나가요. AI는 초안과 검사를 맡아요.</p>
+      <div class="skills rv">
+        <div class="skills__head"><h3>AI를 잘 쓰게 하는 기본기</h3><span>13년 현장에서 쌓았어요</span></div>
+        <div class="skill"><h4>운영 설계</h4><ul><li>예약·정산·시간표·응대 흐름</li><li>지점 매출·회원 관리</li><li>강사·스태프 교육과 인계</li></ul></div>
+        <div class="skill"><h4>데이터·자동화</h4><ul><li>구글 시트 배열 수식·쿼리</li><li>매출 원장·대시보드</li><li>Looker Studio·<wbr>Excel 분석</li></ul></div>
+        <div class="skill"><h4>디자인·콘텐츠</h4><ul><li>Photoshop·<wbr>Illustrator·<wbr>Figma</li><li>Final Cut Pro 영상·<wbr>SketchUp 3D</li><li>인스타·당근·홈페이지 콘텐츠</li></ul></div>
+        <div class="skill"><h4>영업·교육·영어</h4><ul><li>상담·방문 영업·매출 관리</li><li>영어 강의·커리큘럼·세미나</li><li>운영지침서 200쪽 번역·통역</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 대표 사례 -->
+  <section class="sec" id="case">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <span class="eyebrow">대표 사례</span>
+        <h2 class="sec__title">AI로 혼자 만든 예약 시스템</h2>
+        <p class="sec__desc">매니저가 중계하던 예약을 강사가 휴대폰에서 직접 처리하게 바꿨어요. 2026년 7~10월 · 서울숲점.</p>
+      </div>
+      <div class="case">
+        <div class="case__stage rv">
+          <button class="phone" type="button" data-zoom="assets/board-day.webp" data-cap="강사용 예약보드 일정 화면"><img src="assets/board-day.webp" alt="강사용 예약보드 일정 화면"></button>
+          <button class="phone" type="button" data-zoom="assets/board-series.webp" data-cap="고정 일정을 한 번에 옮기는 화면"><img src="assets/board-series.webp" alt="고정 일정을 한 번에 옮기는 화면"></button>
+          <button class="phone" type="button" data-zoom="assets/board-consult.webp" data-cap="회원용 상담 신청 화면"><img src="assets/board-consult.webp" alt="회원용 상담 신청 화면"></button>
+        </div>
+        <div class="case__facts rv">
+          <span class="case__num">3명 × 5개월</span>
+          <p class="case__lbl">개발자 3명이 5개월 걸릴 규모</p>
+          <p class="case__note">소프트웨어 사업 표준 기준(기능점수 약 290FP, 1명이 한 달에 19FP)으로 계산했어요. 이 분량을 AI와 혼자 만들었어요.</p>
+          <div class="facts">
+            <div><span>예약 처리 단계</span><b>4 → 1단계</b></div>
+            <div><span>보드로 처리한 일</span><b>1,315건</b></div>
+            <div><span>그중 강사가 직접 처리 · 8월 → 9월</span><b>70% → 91%</b></div>
+            <div><span>정규 수업 강사 직접 기입</span><b>0 → 85%</b></div>
+            <div><span>업데이트 · 배포 전 자동 테스트</span><b>215회 · 115개</b></div>
+            <div><span>회원 화면 속도</span><b>2.56초 → 0.35초</b></div>
+          </div>
+          <a class="link" href="portfolio.html#booking">예약보드 자세히 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="ba rv">
+        <div class="ba__card ba__card--before"><span class="ba__tag">도입 전 · 4단계</span><h3 class="ba__title">매니저가 모두 중계</h3><p>강사는 쓰기 권한이 없었어요. 매니저가 연락처를 전달하고, 조율된 일정을 다시 받아 노션·정산장부·문자를 모두 처리했어요.</p></div>
+        <svg class="ba__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M14 6l6 6-6 6"/></svg>
+        <div class="ba__card ba__card--after"><span class="ba__tag ba__tag--pt">지금 · 1단계</span><h3 class="ba__title">강사가 휴대폰에서 직접</h3><p>체험 접수·예약·출석·취소·일정 이동·정산 조회까지 강사가 해요. 회원은 열린 시간을 직접 골라 신청해요.</p></div>
+      </div>
+      <figure class="wide rv">
+        <button type="button" data-zoom="assets/board-week.webp" data-cap="예약보드 주간 보기 · 강사·체험·입금 상태 구분"><img src="assets/board-week.webp" alt="예약보드 주간 보기"></button>
+        <figcaption>주간 보기 · 강사·체험·입금 상태를 색으로 구분해요</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 결과물 -->
+  <section class="sec sec--grey" id="works">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <span class="eyebrow">직접 만든 결과물</span>
+        <h2 class="sec__title">말보다 결과물로 보여 드릴게요</h2>
+        <p class="sec__desc">기획부터 제작·배포까지 직접 했어요. 누르면 크게 볼 수 있어요. 회원 정보는 모두 가렸어요.</p>
+      </div>
+      <div class="filters" role="group" aria-label="결과물 분류">
+        <button class="filter" type="button" data-cat="all" aria-pressed="true">전체</button>
+        <button class="filter" type="button" data-cat="report" aria-pressed="false">매출·보고</button>
+        <button class="filter" type="button" data-cat="channel" aria-pressed="false">시간표·채널</button>
+        <button class="filter" type="button" data-cat="design" aria-pressed="false">홍보·디자인</button>
+        <button class="filter" type="button" data-cat="handover" aria-pressed="false">인계·교육</button>
+      </div>
+      <div class="gallery">
+        <button class="card" type="button" data-cat="report" data-zoom="assets/report-strategy-1.webp" data-cap="매출 성장 전략 보고서 · A4 11쪽"><span class="card__img"><img src="assets/report-strategy-1.webp" alt="매출 성장 전략 보고서 표지"></span><span class="card__body"><span class="card__cat">매출·보고</span><span class="card__title">매출 성장 전략 보고서</span></span></button>
+        <button class="card" type="button" data-cat="report" data-zoom="assets/report-strategy-2.webp" data-cap="월별 매출 분석 · 2025년 1월~2026년 9월"><span class="card__img"><img src="assets/report-strategy-2.webp" alt="월별 매출 분석 페이지"></span><span class="card__body"><span class="card__cat">매출·보고</span><span class="card__title">월별 매출 분석</span></span></button>
+        <button class="card" type="button" data-cat="report" data-zoom="assets/report-weekend.webp" data-cap="7월 주말 업무 대표 보고"><span class="card__img"><img src="assets/report-weekend.webp" alt="7월 주말 업무 보고서"></span><span class="card__body"><span class="card__cat">매출·보고</span><span class="card__title">7월 주말 업무 보고</span></span></button>
+        <button class="card" type="button" data-cat="report" data-zoom="assets/roadmap.webp" data-cap="6개월 로드맵과 결정할 것"><span class="card__img"><img src="assets/roadmap.webp" alt="6개월 로드맵"></span><span class="card__body"><span class="card__cat">매출·보고</span><span class="card__title">6개월 로드맵</span></span></button>
+        <button class="card" type="button" data-cat="channel" data-zoom="assets/tt-yoga-a4.webp" data-cap="A4 요가 시간표"><span class="card__img"><img src="assets/tt-yoga-a4.webp" alt="A4 요가 시간표"></span><span class="card__body"><span class="card__cat">시간표·채널</span><span class="card__title">A4 요가 시간표</span></span></button>
+        <button class="card" type="button" data-cat="channel" data-zoom="assets/tt-yoga-insta.webp" data-cap="인스타 요가 시간표 · 4:5"><span class="card__img"><img src="assets/tt-yoga-insta.webp" alt="인스타 요가 시간표"></span><span class="card__body"><span class="card__cat">시간표·채널</span><span class="card__title">인스타 시간표</span></span></button>
+        <button class="card" type="button" data-cat="channel" data-zoom="assets/tt-yoga-naver.webp" data-cap="네이버 요가 시간표 · 1:1"><span class="card__img"><img src="assets/tt-yoga-naver.webp" alt="네이버 요가 시간표"></span><span class="card__body"><span class="card__cat">시간표·채널</span><span class="card__title">네이버 시간표</span></span></button>
+        <button class="card" type="button" data-cat="channel" data-zoom="assets/tt-pilates-kakao.webp" data-cap="카카오 필라테스 시간표"><span class="card__img"><img src="assets/tt-pilates-kakao.webp" alt="카카오 필라테스 시간표"></span><span class="card__body"><span class="card__cat">시간표·채널</span><span class="card__title">카카오 필라테스 시간표</span></span></button>
+        <button class="card" type="button" data-cat="channel" data-zoom="assets/notice-holiday.webp" data-cap="대체공휴일·행사 운영 공지"><span class="card__img"><img src="assets/notice-holiday.webp" alt="휴강 운영 공지 이미지"></span><span class="card__body"><span class="card__cat">시간표·채널</span><span class="card__title">휴강 운영 공지</span></span></button>
+        <button class="card" type="button" data-cat="design" data-zoom="assets/promo-festival.webp" data-cap="페스티벌 참가자 등록 혜택 · 인스타 4:5"><span class="card__img"><img src="assets/promo-festival.webp" alt="페스티벌 참가자 혜택 홍보물"></span><span class="card__body"><span class="card__cat">홍보·디자인</span><span class="card__title">페스티벌 참가자 혜택</span></span></button>
+        <button class="card" type="button" data-cat="design" data-zoom="assets/promo-evening.webp" data-cap="퇴근 후 요가 체험 · 인스타 4:5"><span class="card__img"><img src="assets/promo-evening.webp" alt="퇴근 후 요가 체험 홍보물"></span><span class="card__body"><span class="card__cat">홍보·디자인</span><span class="card__title">퇴근 후 요가 체험</span></span></button>
+        <button class="card" type="button" data-cat="design" data-zoom="assets/promo-carryover.webp" data-cap="재등록 캠페인 시안 · 1:1"><span class="card__img"><img src="assets/promo-carryover.webp" alt="재등록 캠페인 시안"></span><span class="card__body"><span class="card__cat">홍보·디자인</span><span class="card__title">재등록 캠페인</span></span></button>
+        <button class="card" type="button" data-cat="design" data-zoom="assets/web-cta.webp" data-cap="홈페이지 체험 신청 화면 · 모바일"><span class="card__img card__img--phone"><img src="assets/web-cta.webp" alt="홈페이지 체험 신청 화면"></span><span class="card__body"><span class="card__cat">홍보·디자인</span><span class="card__title">홈페이지 체험 신청 화면</span></span></button>
+        <button class="card" type="button" data-cat="design" data-zoom="assets/insta-insights.webp" data-cap="10월 인스타그램 인사이트 · 10월 1~23일 조회 2.1만 회"><span class="card__img"><img src="assets/insta-insights.webp" alt="인스타그램 인사이트 화면"></span><span class="card__body"><span class="card__cat">홍보·디자인</span><span class="card__title">10월 인스타 조회 2.1만 회</span></span></button>
+        <button class="card" type="button" data-cat="handover" data-zoom="assets/handover-cover.webp" data-cap="인수인계 보고서 · 표지(23쪽)"><span class="card__img"><img src="assets/handover-cover.webp" alt="인수인계 보고서 표지"></span><span class="card__body"><span class="card__cat">인계·교육</span><span class="card__title">인수인계 보고서</span></span></button>
+        <button class="card" type="button" data-cat="handover" data-zoom="assets/handover-milestones.webp" data-cap="3개월 이정표 30개"><span class="card__img"><img src="assets/handover-milestones.webp" alt="이정표 페이지"></span><span class="card__body"><span class="card__cat">인계·교육</span><span class="card__title">3개월 이정표</span></span></button>
+        <button class="card" type="button" data-cat="handover" data-zoom="assets/handover-routine.webp" data-cap="업무 총람 · 자동화가 멈추면 손으로 할 일"><span class="card__img"><img src="assets/handover-routine.webp" alt="업무 총람 페이지"></span><span class="card__body"><span class="card__cat">인계·교육</span><span class="card__title">업무 총람</span></span></button>
+        <button class="card" type="button" data-cat="handover" data-zoom="assets/handover-redline.webp" data-cap="레드라인 · 한 번 어기면 되돌리기 어려운 일"><span class="card__img"><img src="assets/handover-redline.webp" alt="레드라인 페이지"></span><span class="card__body"><span class="card__cat">인계·교육</span><span class="card__title">레드라인</span></span></button>
+        <button class="card" type="button" data-cat="handover" data-zoom="assets/manual-cover.webp" data-cap="예약보드 사용 설명서 · 표지(28장)"><span class="card__img"><img src="assets/manual-cover.webp" alt="예약보드 사용 설명서 표지"></span><span class="card__body"><span class="card__cat">인계·교육</span><span class="card__title">예약보드 사용 설명서</span></span></button>
+        <button class="card" type="button" data-cat="handover" data-zoom="assets/manual-flow.webp" data-cap="설명서 본문 · 화면 그대로 따라 하기"><span class="card__img"><img src="assets/manual-flow.webp" alt="설명서 본문 페이지"></span><span class="card__body"><span class="card__cat">인계·교육</span><span class="card__title">설명서 본문</span></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 경력 -->
+  <section class="sec" id="career">
+    <div class="wrap">
+      <div class="sec__head rv">
+        <span class="eyebrow">걸어온 길 · 13년 6개월</span>
+        <h2 class="sec__title">업종은 달라도,<br>늘 만드는 사람이었어요</h2>
+        <p class="sec__desc">어디서든 운영 체계·회원관리 DB·수익률 계산기를 직접 만들었어요. 지금은 AI로 더 크게, 더 빨리 만들어요.</p>
+      </div>
+      <ol class="timeline">
+        <li class="tl tl--now rv">
+          <div class="tl__when"><b>2024.12 – 2026.10</b><span>1년 11개월</span></div><span class="tl__dot" aria-hidden="true"></span>
+          <div class="tl__body">
+            <h3 class="tl__org">애프터 요가&amp;필라테스(구 아리아)<span class="tl__role">매니저 · 서울숲점 운영</span><span class="badge">최근</span></h3>
+            <ul>
+              <li>상담·예약·매출·정산·강사·시간표·홍보까지 센터 운영 전반을 맡았어요.</li>
+              <li>AI로 예약보드·매출 원장·시간표·문자 발송 도구를 만들어, 매니저를 거치던 일을 구조로 옮겼어요.</li>
+              <li>애프터스트레칭 런칭을 맡아, 8·9월 지점 매출의 58%를 차지하는 주력으로 키웠어요.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl rv">
+          <div class="tl__when"><b>2021.08 – 2022.05</b><span>10개월</span></div><span class="tl__dot" aria-hidden="true"></span>
+          <div class="tl__body"><h3 class="tl__org">대한경공매사협회<span class="tl__role">경매 컨설턴트</span></h3>
+            <ul><li>의뢰인 예산·투자 성향에 맞춰 물건을 제안하고, 심층 조사 보고서와 수익률표를 만들었어요.</li><li>투자 수익률 계산기를 만들고, 유튜브 콘텐츠 기획·제작과 라이브 방송을 맡았어요.</li></ul></div>
+        </li>
+        <li class="tl rv">
+          <div class="tl__when"><b>2019.10 – 2021.07</b><span>1년 10개월</span></div><span class="tl__dot" aria-hidden="true"></span>
+          <div class="tl__body"><h3 class="tl__org">토크플래닛 &amp; 코리앤더<span class="tl__role">공동 대표(동업)</span></h3>
+            <ul><li>오프라인 영어회화 스터디 토크플래닛을 운영하며, 코로나로 비대면 수요가 늘자 원어민 화상 영어 서비스를 기획·런칭했어요.</li><li>생활용품을 직접 기획·제작해 와디즈 펀딩에서 최대 430%를 달성했고, 스마트스토어로 판매했어요.</li></ul></div>
+        </li>
+        <li class="tl rv">
+          <div class="tl__when"><b>2019.03 – 2019.09</b><span>7개월</span></div><span class="tl__dot" aria-hidden="true"></span>
+          <div class="tl__body"><h3 class="tl__org">메가스터디 러셀영통학원<span class="tl__role">교무팀</span></h3>
+            <ul><li>학교 앞 이벤트를 기획해 11개 학교에서 잠재 고객 DB 800건 이상을 모으고, 입학 상담·통계 보고를 맡았어요.</li></ul></div>
+        </li>
+        <li class="tl rv">
+          <div class="tl__when"><b>2018.07 – 2019.02</b><span>8개월</span></div><span class="tl__dot" aria-hidden="true"></span>
+          <div class="tl__body"><h3 class="tl__org">화인씨엔씨대부<span class="tl__role">투자 물건 감정팀</span></h3>
+            <ul><li>입지·개발 호재를 분석해 담보가치를 산정하고, 투자 물건 보고서를 썼어요.</li><li>홈페이지·카페·블로그 디지털 마케팅과 커뮤니티 디자인을 총괄했어요.</li></ul></div>
+        </li>
+        <li class="tl rv">
+          <div class="tl__when"><b>2015.12 – 2018.06</b><span>2년 7개월</span></div><span class="tl__dot" aria-hidden="true"></span>
+          <div class="tl__body"><h3 class="tl__org">월드패밀리잉글리시코리아<span class="tl__role">영업부 매니저</span></h3>
+            <ul><li>본사 운영지침서 영어 원문 200쪽과 공문을 번역하고 회의를 통역했어요. 교재 상담·방문 영업도 맡았어요.</li></ul></div>
+        </li>
+        <li class="tl rv">
+          <div class="tl__when"><b>2014.05 – 2015.11</b><span>1년 7개월</span></div><span class="tl__dot" aria-hidden="true"></span>
+          <div class="tl__body"><h3 class="tl__org">잉글버거 스피킹 전문 어학원<span class="tl__role">디렉터 · 영어강사</span></h3>
+            <ul><li>수업 방식·커리큘럼·로테이션·등급 체계를 설계해, 개원 후 정규 수강생 90명을 모았어요.</li><li>프랜차이즈 세미나 자료(PPT·소책자·영상)를 만들고, 초중고 스피킹반을 가르쳤어요.</li></ul></div>
+        </li>
+        <li class="tl rv">
+          <div class="tl__when"><b>2013.05 – 2014.03</b><span>11개월</span></div><span class="tl__dot" aria-hidden="true"></span>
+          <div class="tl__body"><h3 class="tl__org">WCT 어학원<span class="tl__role">영어강사</span></h3>
+            <ul><li>성인 회화반을 운영하며 자체 콘텐츠 ‘1초 영어’를 만들고, 안내 페이지·소개 영상을 제작했어요.</li></ul></div>
+        </li>
+        <li class="tl rv">
+          <div class="tl__when"><b>2010.10 – 2013.04</b><span>2년 7개월</span></div><span class="tl__dot" aria-hidden="true"></span>
+          <div class="tl__body"><h3 class="tl__org">컬쳐컴플렉스 언어교환카페<span class="tl__role">강남지점 총괄 매니저</span></h3>
+            <ul><li>강남지점 월평균 매출 1,400만 원, 월 이용 회원 130~150명을 관리했어요.</li><li>레벨 테스트로 스터디 그룹을 짜고, 스태프 교육·파티 기획·본사 디자인을 맡았어요.</li></ul></div>
+        </li>
+      </ol>
+      <div class="past rv">
+        <div class="past__head"><h3><span class="pt">AI</span> 이전에도 늘 직접 만들었어요</h3><span>예전 작업 13가지 · 누르면 크게 볼 수 있어요</span></div>
+        <div class="gallery gallery--past">
+          <button class="card" type="button" data-zoom="past/auction-yield-sheet.webp" data-cap="경매 투자 수익률표 · 대한경공매사협회 · 2021–2022"><span class="card__img"><img src="past/auction-yield-sheet.webp" alt="경매 투자 수익률표"></span><span class="card__body"><span class="card__cat">대한경공매사협회 · 2021–2022</span><span class="card__title">경매 투자 수익률표</span></span></button>
+          <button class="card" type="button" data-zoom="past/auction-study-banner.webp" data-cap="온라인 경매 스터디 브랜딩 · 머니부스터 · 경매 스터디"><span class="card__img"><img src="past/auction-study-banner.webp" alt="온라인 경매 스터디 브랜딩"></span><span class="card__body"><span class="card__cat">머니부스터 · 경매 스터디</span><span class="card__title">온라인 경매 스터디 브랜딩</span></span></button>
+          <button class="card" type="button" data-zoom="past/wadiz-projects.webp" data-cap="와디즈 펀딩 303%·430% 달성 · 코리앤더 · 2019–2021"><span class="card__img"><img src="past/wadiz-projects.webp" alt="와디즈 펀딩 303%·430% 달성"></span><span class="card__body"><span class="card__cat">코리앤더 · 2019–2021</span><span class="card__title">와디즈 펀딩 303%·430% 달성</span></span></button>
+          <button class="card" type="button" data-zoom="past/talkplanet-launch.webp" data-cap="원어민 화상 영어 서비스 런칭 · 토크플래닛 · 2019–2021"><span class="card__img"><img src="past/talkplanet-launch.webp" alt="원어민 화상 영어 서비스 런칭"></span><span class="card__body"><span class="card__cat">토크플래닛 · 2019–2021</span><span class="card__title">원어민 화상 영어 서비스 런칭</span></span></button>
+          <button class="card" type="button" data-zoom="past/talkplanet-analysis.webp" data-cap="스터디 지원자 데이터 분석 · 토크플래닛 · 2019–2021"><span class="card__img"><img src="past/talkplanet-analysis.webp" alt="스터디 지원자 데이터 분석"></span><span class="card__body"><span class="card__cat">토크플래닛 · 2019–2021</span><span class="card__title">스터디 지원자 데이터 분석</span></span></button>
+          <button class="card" type="button" data-zoom="past/fine-report.webp" data-cap="투자 물건 보고서 · 화인씨엔씨대부 · 2018–2019"><span class="card__img"><img src="past/fine-report.webp" alt="투자 물건 보고서"></span><span class="card__body"><span class="card__cat">화인씨엔씨대부 · 2018–2019</span><span class="card__title">투자 물건 보고서</span></span></button>
+          <button class="card" type="button" data-zoom="past/fine-brochure.webp" data-cap="사업 소개서 · 화인씨엔씨대부 · 2018–2019"><span class="card__img"><img src="past/fine-brochure.webp" alt="사업 소개서"></span><span class="card__body"><span class="card__cat">화인씨엔씨대부 · 2018–2019</span><span class="card__title">사업 소개서</span></span></button>
+          <button class="card" type="button" data-zoom="past/englmom-travel.webp" data-cap="잉글맘 여행영어 과정 · 잉글버거 어학원 · 2014–2015"><span class="card__img"><img src="past/englmom-travel.webp" alt="잉글맘 여행영어 과정"></span><span class="card__body"><span class="card__cat">잉글버거 어학원 · 2014–2015</span><span class="card__title">잉글맘 여행영어 과정</span></span></button>
+          <button class="card" type="button" data-zoom="past/one-second-english.webp" data-cap="1초 영어 과정 · WCT 어학원 · 2013–2014"><span class="card__img"><img src="past/one-second-english.webp" alt="1초 영어 과정"></span><span class="card__body"><span class="card__cat">WCT 어학원 · 2013–2014</span><span class="card__title">1초 영어 과정</span></span></button>
+          <button class="card" type="button" data-zoom="past/staycool-package.webp" data-cap="차량용 코팅제 패키지 · Stay Cool · 외주"><span class="card__img"><img src="past/staycool-package.webp" alt="차량용 코팅제 패키지"></span><span class="card__body"><span class="card__cat">Stay Cool · 외주</span><span class="card__title">차량용 코팅제 패키지</span></span></button>
+          <button class="card" type="button" data-zoom="past/chararak-content.webp" data-cap="어린이 화상 중국어 홈페이지 · 차라락 · 외주"><span class="card__img"><img src="past/chararak-content.webp" alt="어린이 화상 중국어 홈페이지"></span><span class="card__body"><span class="card__cat">차라락 · 외주</span><span class="card__title">어린이 화상 중국어 홈페이지</span></span></button>
+          <button class="card" type="button" data-zoom="past/golf-promo.webp" data-cap="골프 투어 홍보물 · Onelifehub골프 · 외주"><span class="card__img"><img src="past/golf-promo.webp" alt="골프 투어 홍보물"></span><span class="card__body"><span class="card__cat">Onelifehub골프 · 외주</span><span class="card__title">골프 투어 홍보물</span></span></button>
+          <button class="card" type="button" data-zoom="past/tzilu-dashboard.webp" data-cap="SNS 마케팅 분석 대시보드 · 티즈루케이 · 외주"><span class="card__img"><img src="past/tzilu-dashboard.webp" alt="SNS 마케팅 분석 대시보드"></span><span class="card__body"><span class="card__cat">티즈루케이 · 외주</span><span class="card__title">SNS 마케팅 분석 대시보드</span></span></button>
+        </div>
+      </div>
+      <div class="more rv">
+        <div>
+          <h3>교육</h3>
+          <div class="row"><span>명지대학교 환경생명공학과 학사</span><span>2010</span></div>
+          <div class="row"><span>기안옥션 실전 경매반 23기</span><span>2019</span></div>
+          <div class="row"><span>종로경매학원 부동산 경매 과정</span><span>2017</span></div>
+          <div class="row"><span>패스트캠퍼스 재무분석 실전캠프</span><span>2016</span></div>
+        </div>
+        <div>
+          <h3>프로젝트·외주</h3>
+          <div class="row"><span>와디즈 펀딩 최대 430% 달성 · 티스카프·리얼빅 마스크 외</span></div>
+          <div class="row"><span>어린이 화상교육 ‘차라락’ 홈페이지 · 알엘캠퍼스 홍보물</span></div>
+          <div class="row"><span>Onelifehub골프 홍보물 · Stay Cool 패키지 디자인</span></div>
+          <div class="row"><span>부동산 경매 투자 전 과정 · 낙찰부터 매도까지</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 마무리 -->
+  <section class="cta" id="contact">
+    <div class="wrap rv">
+      <img class="cta__me" src="photo/avatar.webp" alt="박민규 아바타">
+      <h2 class="cta__title">반복되는 일, 함께 줄여 볼까요?</h2>
+      <p class="cta__desc">지금 쓰는 도구와 규모에 맞게 같은 체계를 만들고, 직원이 바로 쓰도록 교육과 인계까지 해 드려요.</p>
+      <div class="cta__btns">
+        <a class="btn btn--primary btn--lg" href="mailto:pierce.park.83@gmail.com">메일 보내기</a>
+        <a class="btn btn--weak btn--lg" href="tel:010-3093-0375">전화하기 010-3093-0375</a>
+      </div>
+      <p class="cta__links"><a href="resume.pdf">PDF 이력서</a> · <a href="portfolio.html">애프터 포트폴리오</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>숫자 출처 · 애프터 요가&amp;필라테스 매출 원장·예약 장부·업무 기록(2026년 10월 조회)과 인수인계 보고서(2026-10-20). 매출은 담당 지점 결제 금액 기준이에요. 예약 시스템 규모는 기능점수 약 290FP를 표준 생산성(1명이 한 달에 19FP)으로 나눠, 1명이 15개월(3명이 5개월) 걸리는 분량으로 계산했어요. 화면 속 회원 정보는 모두 가렸어요.</p>
+    <p>2026.11 · 박민규</p>
+  </div>
+</footer>
+
+<div class="lb" hidden role="dialog" aria-modal="true" aria-label="크게 보기">
+  <button class="btn btn--sm btn--dark-weak lb__close" type="button">닫기</button>
+  <figure><img alt=""><figcaption></figcaption></figure>
+</div>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  // 스크롤 등장
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const rvs = [...document.querySelectorAll('.rv')];
+  if (!reduce && 'IntersectionObserver' in window && !document.documentElement.classList.contains('export')) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -8% 0px' });
+    rvs.forEach(el => io.observe(el));
+  } else rvs.forEach(el => el.classList.add('in'));
+
+  // 상단 바 — 보고 있는 섹션 표시
+  const links = [...document.querySelectorAll('.nav__links a')];
+  const byId = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  if ('IntersectionObserver' in window) {
+    const so = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(a => a.classList.toggle('is-on', a === byId.get(e.target.id)));
+    }), { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('section[id]').forEach(s => so.observe(s));
+  }
+
+  // 결과물 분류
+  const filters = [...document.querySelectorAll('.filter')];
+  const cards = [...document.querySelectorAll('#works .card')];
+  filters.forEach(f => f.addEventListener('click', () => {
+    filters.forEach(x => x.setAttribute('aria-pressed', String(x === f)));
+    cards.forEach(c => { c.hidden = f.dataset.cat !== 'all' && c.dataset.cat !== f.dataset.cat; });
+  }));
+
+  // 크게 보기
+  const lb = document.querySelector('.lb'), lbImg = lb.querySelector('img'), lbCap = lb.querySelector('figcaption');
+  const lbClose = lb.querySelector('.lb__close');
+  let opener = null;
+  function openLb(btn) {
+    opener = btn; lbImg.src = btn.dataset.zoom; lbImg.alt = btn.dataset.cap; lbCap.textContent = btn.dataset.cap;
+    lb.hidden = false; document.body.style.overflow = 'hidden'; lbClose.focus();
+  }
+  function closeLb() {
+    lb.hidden = true; lbImg.removeAttribute('src'); document.body.style.overflow = '';
+    if (opener) opener.focus();
+  }
+  document.querySelectorAll('[data-zoom]').forEach(b => b.addEventListener('click', () => openLb(b)));
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+</script>
+</body>
+</html>
