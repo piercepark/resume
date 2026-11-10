@@ -204,6 +204,49 @@
   .legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 3px; vertical-align: -1px; }
   .chart__note { margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--t-sub); }
 
+  /* 디자인 작품 — 작품마다 제 색의 무대 위에 놓는 전시형 갤러리 */
+  .chap { margin-top: 88px; }
+  .chap:first-of-type { margin-top: 56px; }
+  .chap__head { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 0 8px; align-items: baseline; max-width: 780px; margin-bottom: 28px; }
+  .chap__no { font-size: 15px; font-weight: 700; color: var(--t-sub); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+  .chap__title { font-size: 24px; line-height: 1.4; font-weight: 700; letter-spacing: -0.015em; color: var(--t-strong); }
+  .chap__desc { grid-column: 2; margin-top: 6px; font-size: 17px; line-height: 1.6; color: var(--t-body); }
+  .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px 24px; align-items: start; }
+  .s3 { grid-column: span 3; } .s4 { grid-column: span 4; } .s5 { grid-column: span 5; } .s6 { grid-column: span 6; }
+  .s7 { grid-column: span 7; } .s8 { grid-column: span 8; } .s12 { grid-column: span 12; }
+  .wk { min-width: 0; }
+  .wk__stage { position: relative; display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%;
+               padding: 40px; overflow: hidden; border-radius: 24px; background: var(--st, var(--bg-grey)); cursor: zoom-in; }
+  .wk__stage:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+  .wk__stage img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 10px;
+                   box-shadow: 0 2px 6px rgba(0,29,58,.06), 0 24px 56px rgba(0,29,58,.14);
+                   transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s; }
+  button.wk__stage:hover img, .wk__zoom:hover img { transform: translateY(-6px) scale(1.012); box-shadow: 0 2px 6px rgba(0,29,58,.06), 0 32px 72px rgba(0,29,58,.20); }
+  div.wk__stage { cursor: default; }
+  .wk__zoom { display: flex; align-items: center; justify-content: center; min-width: 0; max-height: 100%; border-radius: 10px; cursor: zoom-in; }
+  .wk__zoom:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+  .wk__stage--dark img { box-shadow: 0 24px 56px rgba(0,0,0,.45); }
+  .r1 { aspect-ratio: 1 / 1; } .r45 { aspect-ratio: 4 / 5; } .r34 { aspect-ratio: 3 / 4; } .r169 { aspect-ratio: 16 / 9; } .r21 { aspect-ratio: 2 / 1; }
+  .wk__stage img.fill-h { height: 100%; }
+  .wk__stage--pair .wk__zoom { height: 100%; }
+  .wk__stage--pair .wk__zoom img { height: 100%; width: auto; }
+  .row-h { height: 460px; }
+  .wk__stage--note { justify-content: space-between; gap: 48px; padding: 56px 64px; }
+  .wk__note { flex: 1 1 0; max-width: 380px; }
+  .wk__note b { display: block; font-size: 22px; line-height: 1.45; font-weight: 700; letter-spacing: -0.01em; color: var(--t-strong); }
+  .wk__note p { margin-top: 12px; font-size: 16px; line-height: 1.7; color: var(--t-body); }
+  .wk__note ul { margin-top: 20px; list-style: none; border-top: 1px solid rgba(0,0,33,.09); }
+  .wk__note li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(0,0,33,.09);
+                 font-size: 14px; line-height: 1.5; color: var(--t-body); }
+  .wk__note li span:last-child { font-weight: 700; color: var(--t-strong); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .wk__stage--note .wk__zoom { flex: 0 0 auto; height: 100%; }
+  .wk__stage--note .wk__zoom img { height: 100%; }
+  .wk figcaption { margin-top: 16px; }
+  .wk__meta { display: block; font-size: 13px; line-height: 1.5; font-weight: 600; color: var(--t-sub); }
+  .wk figcaption b { display: block; margin-top: 2px; font-size: 17px; line-height: 1.45; font-weight: 700; color: var(--t-title); }
+  .wk figcaption > span:last-child { display: block; margin-top: 4px; font-size: 15px; line-height: 1.6; color: var(--t-body); }
+  html.export .wk__stage img { transition: none; }
+
   /* 바닥 */
   .foot { display: flex; justify-content: space-between; gap: 24px; margin-top: 88px; padding-top: 28px; padding-bottom: 56px;
           border-top: 1px solid var(--line); font-size: 13px; line-height: 1.6; color: var(--t-sub); }
@@ -235,6 +278,14 @@
     .ba { grid-template-columns: 1fr; }
     .ba__arrow { transform: rotate(90deg); margin: 8px 0; }
     .stage { padding: 40px 24px 32px; gap: 24px; }
+    .chap { margin-top: 72px; }
+    .bento { gap: 36px 20px; }
+    .s3, .s4, .s5, .s6, .s7 { grid-column: span 6; }
+    .s8, .s12 { grid-column: span 12; }
+    .wk__stage { padding: 32px; border-radius: 20px; }
+    .wk__stage--note { gap: 32px; padding: 40px; }
+    .row-h { height: 420px; }
+    .s4 .row-h { height: auto; aspect-ratio: 4 / 5; }
   }
   @media (max-width: 540px) {
     .wrap { padding-left: 20px; padding-right: 20px; }
@@ -265,6 +316,23 @@
     .flow li + li::after { display: none; }
     .card { padding: 24px 20px; }
     .foot { flex-direction: column; gap: 8px; }
+    .chap { margin-top: 56px; }
+    .chap__head { grid-template-columns: 1fr; }
+    .chap__no { margin-bottom: 4px; }
+    .chap__desc { grid-column: 1; }
+    .chap__title { font-size: 22px; }
+    .bento { gap: 32px 0; }
+    .s3, .s4, .s5, .s6, .s7, .s8, .s12 { grid-column: 1 / -1; }
+    .wk__stage { padding: 24px; border-radius: 18px; }
+    .wk__stage--pair { gap: 12px; }
+    .wk__stage--pair .wk__zoom { width: calc(50% - 6px); height: auto; }
+    .wk__stage--pair .wk__zoom img { width: 100%; height: auto; }
+    .row-h { height: auto; aspect-ratio: 4 / 5; }
+    .wk__stage--pair.row-h { aspect-ratio: 16 / 11; }
+    .wk__stage--note { flex-direction: column; align-items: stretch; aspect-ratio: auto; gap: 28px; padding: 28px 24px; }
+    .wk__note { max-width: none; }
+    .wk__stage--note .wk__zoom { align-self: center; width: 72%; height: auto; }
+    .wk__stage--note .wk__zoom img { width: 100%; height: auto; }
   }
 </style>
 </head>
@@ -310,6 +378,7 @@
     <div class="wrap tabs__in" role="tablist" aria-label="결과물 분야">
       <button class="tab" role="tab" id="t-overview" data-tab="overview" aria-controls="p-overview" type="button">한눈에</button>
       <button class="tab" role="tab" id="t-booking" data-tab="booking" aria-controls="p-booking" type="button">예약보드</button>
+      <button class="tab" role="tab" id="t-works" data-tab="works" aria-controls="p-works" type="button">디자인 작품</button>
       <button class="tab" role="tab" id="t-numbers" data-tab="numbers" aria-controls="p-numbers" type="button">매출·보고</button>
       <button class="tab" role="tab" id="t-channels" data-tab="channels" aria-controls="p-channels" type="button">시간표·채널</button>
       <button class="tab" role="tab" id="t-messages" data-tab="messages" aria-controls="p-messages" type="button">응대·발송</button>
@@ -388,6 +457,129 @@
             <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>다른 강사 예약 수정 차단</b><span>본인 담당 건만 옮기고 취소할 수 있어요</span></p></div>
             <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><p><b>베드 2개 상한·당일 신청 차단</b><span>물리적 자리와 운영 규칙을 화면이 지켜요</span></p></div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 디자인 작품 -->
+    <section class="panel" id="p-works" role="tabpanel" aria-labelledby="t-works" hidden>
+      <header class="ph">
+        <p class="ph__eyebrow">2026.04 – 10 · 기획·디자인</p>
+        <h2 class="ph__title">정보가 한눈에 읽히도록,<br>디자인으로 풀었어요</h2>
+        <p class="ph__desc">가격·보고서·공지처럼 글이 많은 정보를 그림과 지면으로 바꿨어요. 센터를 운영하면서 AI 디자인 도구로 직접 기획하고 만든 홍보물·공지·보고서와 디자인 시안이에요. 작품을 누르면 원본 크기로 볼 수 있어요.</p>
+      </header>
+
+      <div class="chap">
+        <div class="chap__head">
+          <span class="chap__no">01</span>
+          <h3 class="chap__title">가격을 면적으로 보여 주는 그리드톤</h3>
+          <p class="chap__desc">숫자를 읽기 전에 크기로 먼저 느끼게 했어요. 같은 격자 문법으로 가격표·비교표·A4 요약을 한 시리즈로 만든 디자인 시안이에요.</p>
+        </div>
+        <div class="bento">
+          <figure class="wk s6">
+            <button class="wk__stage r1" style="--st:#f3f1ec" type="button" data-zoom="assets/works-grid-price.webp" data-cap="요가 회원권 가격표 · 디자인 시안 1:1"><img class="fill-h" src="assets/works-grid-price.webp" alt="회당 가격이 기간에 따라 내려가는 것을 칸의 크기로 보여 주는 요가 회원권 가격표" width="1600" height="1600" loading="lazy"></button>
+            <figcaption><span class="wk__meta">디자인 시안 · 1:1 가격 안내</span><b>회당 11,000원까지</b><span>기간이 길수록 내려가는 회당 가격을 칸의 크기로 그렸어요. 표를 읽지 않아도 –63%가 보여요.</span></figcaption>
+          </figure>
+          <figure class="wk s6">
+            <button class="wk__stage r1" style="--st:#eceff3" type="button" data-zoom="assets/works-grid-manual.webp" data-cap="도수치료와 뭐가 다를까 · 상담 자료 시안"><img class="fill-h" src="assets/works-grid-manual.webp" alt="도수치료와 1:1 스트레칭을 1년에 받을 수 있는 시간으로 비교한 그래픽" width="1600" height="1600" loading="lazy"></button>
+            <figcaption><span class="wk__meta">디자인 시안 · 1:1 상담 자료</span><b>도수치료와 뭐가 다를까</b><span>같은 1:1 케어를 1년에 받을 수 있는 시간으로 바꿔, 칸의 크기로 비교했어요.</span></figcaption>
+          </figure>
+          <figure class="wk s12">
+            <div class="wk__stage wk__stage--note r21" style="--st:#f3f1ec">
+              <div class="wk__note">
+                <b>표 대신 그래프로 읽는 가격표</b>
+                <p>기간별 회당 가격, 늘어나는 서비스, 아끼는 금액을 같은 격자 위에 올려 A4 한 장에 담았어요. 이 시안은 그 뒤 확정된 회원권 개편안의 디자인 기반이 됐어요.</p>
+                <ul>
+                  <li><span>10회권 회당</span><span>30,000원</span></li>
+                  <li><span>28개월 회당</span><span>11,000원</span></li>
+                  <li><span>가장 큰 차이</span><span>–63%</span></li>
+                </ul>
+              </div>
+              <button class="wk__zoom" type="button" data-zoom="assets/works-grid-summary.webp" data-cap="회원권 요약 · A4 디자인 시안"><img src="assets/works-grid-summary.webp" alt="오래 할수록 훨씬 이득, 회원권 가격과 서비스를 한 장에 정리한 A4 요약" width="1416" height="2000" loading="lazy"></button>
+            </div>
+            <figcaption><span class="wk__meta">A4 · 회원권 개편안의 디자인 기반</span><b>오래 할수록, 훨씬 이득</b><span>요가에서 만든 축을 필라테스·복합권까지 그대로 이어, 상품끼리도 바로 비교돼요.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="chap">
+        <div class="chap__head">
+          <span class="chap__no">02</span>
+          <h3 class="chap__title">제목이 곧 결론인 보고서</h3>
+          <p class="chap__desc">대표가 첫 줄만 읽어도 결정할 수 있게, 제목에 결론을 쓰고 근거를 아래로 쌓았어요. 신문 지면처럼 위계를 세워 숫자가 많아도 길을 잃지 않아요.</p>
+        </div>
+        <div class="bento">
+          <figure class="wk s4">
+            <button class="wk__stage r34" style="--st:#ebe7df" type="button" data-zoom="assets/works-report-inflow.webp" data-cap="유입경로 분석 · 대표 보고 · 모바일 1쪽"><img src="assets/works-report-inflow.webp" alt="절반은 네이버로 왔고, 큰 회원권은 간판·전단지·인스타에서 나왔다는 유입경로 보고서" width="1125" height="2000" loading="lazy"></button>
+            <figcaption><span class="wk__meta">대표 보고 · 모바일 3쪽</span><b>절반은 네이버로 왔고</b><span>문의 217명이 처음 어디서 알았는지 가려내, 어디에 광고비를 쓸지 바로 보이게 했어요.</span></figcaption>
+          </figure>
+          <figure class="wk s4">
+            <button class="wk__stage r34" style="--st:#ebe7df" type="button" data-zoom="assets/works-report-half.webp" data-cap="상반기 매출 보고 · 2025 vs 2026"><img src="assets/works-report-half.webp" alt="작년 대비 상반기 매출, 두 분기 모두 성장을 보여 주는 보고서" width="1091" height="2000" loading="lazy"></button>
+            <figcaption><span class="wk__meta">매출 보고 · 2026.06</span><b>두 분기 모두 성장</b><span>전년 같은 달과 나란히 놓은 막대와 항목별 증감 네 줄로, 흐름이 먼저 보여요.</span></figcaption>
+          </figure>
+          <figure class="wk s4">
+            <button class="wk__stage r34" style="--st:#ebe7df" type="button" data-zoom="assets/works-report-members.webp" data-cap="회원목록 1,424건 운영 인사이트 · 1장 보고서"><img src="assets/works-report-members.webp" alt="회원목록 1,424건에서 강점과 빈틈을 정리한 1장 보고서" width="1479" height="2000" loading="lazy"></button>
+            <figcaption><span class="wk__meta">운영 인사이트 · A4 1장</span><b>회원 1,424건이 말하는 것</b><span>회원 목록 전체를 지표·발견·이번 주 할 일로 압축했어요.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="chap">
+        <div class="chap__head">
+          <span class="chap__no">03</span>
+          <h3 class="chap__title">한 센터, 대상마다 다른 목소리</h3>
+          <p class="chap__desc">외국인, 처음 보는 사람, 기존 회원처럼 읽는 사람이 다르면 서체와 색부터 바꿨어요. 공지 한 장도 잡지 지면처럼 다듬었어요.</p>
+        </div>
+        <div class="bento">
+          <figure class="wk s8">
+            <div class="wk__stage wk__stage--pair row-h" style="--st:#e6ddd3">
+              <button class="wk__zoom" type="button" data-zoom="assets/works-en-cover.webp" data-cap="외국인 회원용 영문 캐러셀 · 첫 장"><img src="assets/works-en-cover.webp" alt="Yoga and pilates in Seoul, easy to join 영문 캐러셀 첫 장" width="1280" height="1600" loading="lazy"></button>
+              <button class="wk__zoom" type="button" data-zoom="assets/works-en-visit.webp" data-cap="외국인 회원용 영문 캐러셀 · 마지막 장 오시는 길"><img src="assets/works-en-visit.webp" alt="Right by Seoul Forest 영문 캐러셀 마지막 장" width="1280" height="1600" loading="lazy"></button>
+            </div>
+            <figcaption><span class="wk__meta">인스타 캐러셀 4:5 · 7장</span><b>Yoga &amp; pilates in Seoul, <i>easy to join.</i></b><span>서울숲 근처 외국인을 위한 영문 안내예요. 세리프와 이탤릭으로 한국어 홍보물과 다른 목소리를 냈어요.</span></figcaption>
+          </figure>
+          <figure class="wk s4">
+            <button class="wk__stage wk__stage--dark row-h" style="--st:#1d221e" type="button" data-zoom="assets/works-bareun-dark.webp" data-cap="바른스트레칭 상품 소개 · 대표 보고용 기획 제안"><img class="fill-h" src="assets/works-bareun-dark.webp" alt="바른스트레칭, 뭐 하는 곳이냐면 상품 소개 이미지" width="1080" height="1350" loading="lazy"></button>
+            <figcaption><span class="wk__meta">기획 제안 · 인스타 4:5</span><b>바른스트레칭, 뭐 하는 곳이냐면</b><span>짙은 그린에 라임 포인트로 ‘치료와 운동 사이’라는 자리를 선명하게 그렸어요.</span></figcaption>
+          </figure>
+          <figure class="wk s4">
+            <button class="wk__stage r34" style="--st:#efe9e0" type="button" data-zoom="assets/works-bareun-editorial.webp" data-cap="패시브 스트레칭 2차 체험 이벤트 · 센터 안내문"><img src="assets/works-bareun-editorial.webp" alt="누워만 계세요, 몸은 전문가가 풀어드립니다 안내문" width="1414" height="2000" loading="lazy"></button>
+            <figcaption><span class="wk__meta">A4 안내문 · 기존 회원 대상</span><b>누워만 계세요</b><span>사진·시간·가격·신청 방법을 잡지 지면처럼 한 장에 정리했어요.</span></figcaption>
+          </figure>
+          <figure class="wk s4">
+            <button class="wk__stage r34" style="--st:#ece9e3" type="button" data-zoom="assets/works-notice-editorial.webp" data-cap="5월 토요일 오전 요가 대강 안내 · 앱 공지"><img class="fill-h" src="assets/works-notice-editorial.webp" alt="5월 토요일 오전 요가 대강 안내 공지" width="1600" height="2000" loading="lazy"></button>
+            <figcaption><span class="wk__meta">앱 공지 4:5</span><b>토요일 대강 안내</b><span>강사 변경 공지를 신문 지면처럼 짰어요. 바뀌는 사람과 날짜가 먼저 보여요.</span></figcaption>
+          </figure>
+          <figure class="wk s4">
+            <button class="wk__stage r34" style="--st:#e7e2da" type="button" data-zoom="assets/works-motion-cover.webp" data-cap="한 층 투어 모션 영상 · 인스타 커버"><img class="fill-h" src="assets/works-motion-cover.webp" alt="이 모든 게, 한 층에 공간 평면도 커버" width="1080" height="1350" loading="lazy"></button>
+            <figcaption><span class="wk__meta">모션 영상 커버 · 4:5</span><b>이 모든 게, 한 층에</b><span>모든 공간이 한 층에 있다는 장점을 평면도 한 장으로 보여 줬어요.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="chap">
+        <div class="chap__head">
+          <span class="chap__no">04</span>
+          <h3 class="chap__title">스크롤을 멈추게 하는 한 장</h3>
+          <p class="chap__desc">피드에서 바로 읽히도록 장면 하나, 문장 하나만 크게 남겼어요.</p>
+        </div>
+        <div class="bento">
+          <figure class="wk s6">
+            <button class="wk__stage wk__stage--dark r1" style="--st:#2b2522" type="button" data-zoom="assets/works-promo-hatha.webp" data-cap="하타요가와 싱잉볼명상 · 원데이 클래스"><img class="fill-h" src="assets/works-promo-hatha.webp" alt="하타요가와 싱잉볼명상 원데이 클래스 홍보물" width="1280" height="1600" loading="lazy"></button>
+            <figcaption><span class="wk__meta">원데이 클래스 · 4:5 썸네일</span><b>하타요가와 싱잉볼명상</b><span>현장 사진 세 컷과 영문 세리프로 차분한 명상 분위기를 만들었어요.</span></figcaption>
+          </figure>
+          <figure class="wk s6">
+            <button class="wk__stage r1" style="--st:#dfe3e8" type="button" data-zoom="assets/works-promo-bungee.webp" data-cap="번지 클래스 · 인스타 4:5"><img class="fill-h" src="assets/works-promo-bungee.webp" alt="중력을 거슬러 하늘을 나는 번지 클래스 홍보물" width="1280" height="1600" loading="lazy"></button>
+            <figcaption><span class="wk__meta">수업 홍보 · 인스타 4:5</span><b>중력을 거슬러, 하늘을 나는 번지</b><span>움직임이 가장 큰 순간을 골라 제목과 겹쳤어요.</span></figcaption>
+          </figure>
+          <figure class="wk s6">
+            <button class="wk__stage r1" style="--st:#f4e9ea" type="button" data-zoom="assets/works-promo-comeback.webp" data-cap="끝난 회원 컴백 무제한 · 4:5 썸네일"><img class="fill-h" src="assets/works-promo-comeback.webp" alt="다시, 무제한으로 컴백 프로모션 홍보물" width="1280" height="1600" loading="lazy"></button>
+            <figcaption><span class="wk__meta">재등록 캠페인 · 4:5 썸네일</span><b>다시, 무제한으로.</b><span>앱 검색창 모양을 빌려, 상품을 고르는 순간을 그대로 보여 줬어요.</span></figcaption>
+          </figure>
+          <figure class="wk s6">
+            <button class="wk__stage r1" style="--st:#e8edf5" type="button" data-zoom="assets/works-notice-summer.webp" data-cap="여름휴가 휴무 안내 · 인스타 4:5"><img class="fill-h" src="assets/works-notice-summer.webp" alt="8월 14일부터 17일까지 휴무를 달력으로 보여 주는 공지" width="1280" height="1600" loading="lazy"></button>
+            <figcaption><span class="wk__meta">휴무 공지 · 인스타 4:5</span><b>날짜 나열 대신 달력 한 장</b><span>쉬는 날과 다시 여는 날을 색으로 갈라, 읽지 않아도 보이게 했어요.</span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
